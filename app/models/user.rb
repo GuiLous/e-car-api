@@ -20,7 +20,13 @@
 class User < ApplicationRecord
   has_secure_password
 
+  has_many :user_services
+  has_many :services, through: :user_services
+
   enum :role, { customer: 0, assistant: 1 }
 
   normalizes :email, with: ->(e) { e.strip.downcase }
+
+  validates :name, :email, presence: true
+  validates :email, uniqueness: true
 end

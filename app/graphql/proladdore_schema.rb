@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ProladdoreSchema < GraphQL::Schema
-  max_complexity(200)
+  max_complexity(500)
   max_depth(20)
 
   mutation(Types::MutationType)

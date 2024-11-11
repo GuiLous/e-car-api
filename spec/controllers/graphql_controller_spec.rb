@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe GraphqlController do
+RSpec.describe GraphqlController, type: :controller do
   describe 'POST #execute' do
     let(:query) { '{ sampleQuery { field } }' }
     let(:variables) { { 'var1' => 'value1' } }

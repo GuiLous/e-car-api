@@ -45,3 +45,6 @@
 
 # Ignore coverage files
 /coverage
+
+# Ignore local script
+/lib/tasks/db_force_reset.rake

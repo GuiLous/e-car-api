@@ -32,6 +32,7 @@ group :development do
   gem "annotate", "~> 3.2"
   gem "rubocop-rails-omakase", require: false
   gem "rubocop-performance", require: false
+  gem "rubocop-graphql", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
   gem "rubocop-rspec_rails", require: false

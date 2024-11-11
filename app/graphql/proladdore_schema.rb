@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProladdoreApiSchema < GraphQL::Schema
+class ProladdoreSchema < GraphQL::Schema
   mutation(Types::MutationType)
   query(Types::QueryType)
 

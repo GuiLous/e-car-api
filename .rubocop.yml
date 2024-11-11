@@ -4,8 +4,9 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 require:
   - rubocop-rails
   - rubocop-performance
-#  - rubocop-rspec
-#  - rubocop-rspec_rails
+  - rubocop-graphql
+  - rubocop-rspec
+  - rubocop-rspec_rails
 
 AllCops:
   TargetRubyVersion: 3.0
@@ -54,23 +55,23 @@ Metrics/BlockLength:
 Metrics/ParameterLists:
   Enabled: false
 
-#GraphQL/FieldDescription:
-#  Enabled: false
-#
-#GraphQL/ArgumentDescription:
-#  Enabled: false
-#
-#GraphQL/ObjectDescription:
-#  Enabled: false
-#
-#GraphQL/ExtractType:
-#  Enabled: false
-#
-#GraphQL/ExtractInputType:
-#  Enabled: false
-#
-#GraphQL/FieldMethod:
-#  Enabled: false
+GraphQL/FieldDescription:
+  Enabled: false
+
+GraphQL/ArgumentDescription:
+  Enabled: false
+
+GraphQL/ObjectDescription:
+  Enabled: false
+
+GraphQL/ExtractType:
+  Enabled: false
+
+GraphQL/ExtractInputType:
+  Enabled: false
+
+GraphQL/FieldMethod:
+  Enabled: false
 
 Rails/I18nLocaleTexts:
   Exclude:
@@ -86,23 +87,23 @@ Rails/UniqueValidationWithoutIndex:
 Rails/Inquiry:
   Enabled: true
 
-#RSpec/AnyInstance:
-#  Enabled: false
-#
-#RSpec/ContextWording:
-#  Enabled: false
-#
-#RSpec/ExampleLength:
-#  Enabled: false
-#
-#RSpec/MessageSpies:
-#  Enabled: false
-#
-#RSpec/MultipleExpectations:
-#  Enabled: false
-#
-#RSpec/NestedGroups:
-#  Enabled: false
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MessageSpies:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false

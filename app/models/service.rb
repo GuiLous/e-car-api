@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: services
@@ -9,7 +11,7 @@
 #  updated_at  :datetime         not null
 #
 class Service < ApplicationRecord
-  has_many :user_services
+  has_many :user_services, dependent: :destroy
   has_many :users, through: :user_services
 
   validates :name, :description, presence: true

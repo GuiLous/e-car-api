@@ -16,10 +16,10 @@ RSpec.describe Types::QueryType do
 
     context 'when does not exists users with assistant role' do
       it 'returns a empty array' do
-          Fabricate :user, role: :customer
-          response = ProladdoreSchema.execute(query).as_json
-          data = response['data']['assistants']
-          expect(data.size).to eq(0)
+        Fabricate :user, role: :customer
+        response = ProladdoreSchema.execute(query).as_json
+        data = response['data']['assistants']
+        expect(data.size).to eq(0)
       end
     end
 

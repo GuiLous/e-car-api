@@ -1,8 +1,114 @@
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
+require:
+  - rubocop-rails
+  - rubocop-performance
+#  - rubocop-rspec
+#  - rubocop-rspec_rails
+
+AllCops:
+  TargetRubyVersion: 3.0
+  Exclude:
+    # You could specify set of files or dirs while you want to be ignored by rubocop
+    - "vendor/**/*"
+    - "bin/*"
+    - "db/schema.rb"
+    - "db/seeds.rb"
+    - "app/jobs/**/*"
+    - "Gemfile.lock"
+    - !ruby/regexp /old_and_unused\.rb$/
+    - "config/**/*"
+    - "tmp/**/*"
+    - "node_modules/**/*"
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 217
+  Exclude:
+    - "spec/**/*"
+
+Metrics/ClassLength:
+  Enabled: true
+
+Metrics/MethodLength:
+  Exclude:
+    - "app/routes/**/*"
+    - "db/migrate/**/*"
+    - "app/services/api/**/*"
+  Max: 20
+
+Metrics/AbcSize:
+  Exclude:
+    - "app/routes/**/*"
+    - "db/migrate/**/*"
+
+Metrics/BlockLength:
+  Exclude:
+    - "app/routes/**/*"
+    - "db/**/*"
+    - "spec/**/*"
+    - "config/routes.rb"
+    - "lib/tasks/**/*"
+
+Metrics/ParameterLists:
+  Enabled: false
+
+#GraphQL/FieldDescription:
+#  Enabled: false
 #
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+#GraphQL/ArgumentDescription:
+#  Enabled: false
+#
+#GraphQL/ObjectDescription:
+#  Enabled: false
+#
+#GraphQL/ExtractType:
+#  Enabled: false
+#
+#GraphQL/ExtractInputType:
+#  Enabled: false
+#
+#GraphQL/FieldMethod:
+#  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Exclude:
+    - "app/helpers/**/*"
+    - "spec/**/*"
+
+Rails/DynamicFindBy:
+  Enabled: true
+
+Rails/UniqueValidationWithoutIndex:
+  Enabled: false
+
+Rails/Inquiry:
+  Enabled: true
+
+#RSpec/AnyInstance:
+#  Enabled: false
+#
+#RSpec/ContextWording:
+#  Enabled: false
+#
+#RSpec/ExampleLength:
+#  Enabled: false
+#
+#RSpec/MessageSpies:
+#  Enabled: false
+#
+#RSpec/MultipleExpectations:
+#  Enabled: false
+#
+#RSpec/NestedGroups:
+#  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+
+Style/OptionalBooleanParameter:
+  Enabled: false

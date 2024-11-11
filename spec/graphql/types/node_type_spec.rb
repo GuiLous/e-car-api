@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 describe Types::NodeType, type: :type do
   describe '.included' do
     it 'includes the GraphQL::Types::Relay::NodeBehaviors module' do

@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe GraphqlController, type: :controller do
   describe 'POST #execute' do
     let(:query) { "{ sampleQuery { field } }" }

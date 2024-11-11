@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'rails_helper'
+
 RSpec.describe Types::MutationType, type: :graphql do
   describe 'test_field' do
     let(:query) do

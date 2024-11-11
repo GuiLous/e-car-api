@@ -17,19 +17,27 @@ gem "jbuilder"
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "figaro", "~> 1.2"
-gem "annotate", "~> 3.2"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
   gem "brakeman", require: false
-  gem "rubocop-rails-omakase", require: false
+  gem "fabrication"
+  gem "faker"
+  gem "rspec-rails"
+  gem "simplecov"
+  gem "shoulda-matchers", "~> 6.0"
 end
 
 group :development do
+  gem "annotate", "~> 3.2"
+  gem "rubocop-rails-omakase", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
+  gem "rubocop-rspec_rails", require: false
   gem "web-console"
 end
 
 group :test do
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem "database_cleaner"
 end

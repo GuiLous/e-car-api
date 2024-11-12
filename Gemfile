@@ -5,6 +5,7 @@ ruby "3.3.6"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
+gem "fabrication"
 gem "figaro", "~> 1.2"
 gem "graphiql-rails"
 gem "graphql", "~> 2.2"
@@ -22,7 +23,6 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 group :development, :test do
   gem "brakeman", require: false
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
-  gem "fabrication"
   gem "faker"
   gem "rspec-rails"
   gem "shoulda-matchers", "~> 6.0"

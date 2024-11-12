@@ -15,7 +15,7 @@ module Types
     end
 
     def me
-      User.find(1)
+      User.first
     end
   end
 end

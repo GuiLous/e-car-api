@@ -30,6 +30,7 @@ class AssistantService < ApplicationRecord
 
   def hire(date:, user:)
     raise Exceptions::SameUserError if assistant.user_id == user.id
+
     hired_services.create(schedule_date: date, user: user)
   end
 end

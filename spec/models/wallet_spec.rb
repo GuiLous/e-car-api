@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Wallet do
@@ -6,7 +8,5 @@ RSpec.describe Wallet do
       wallet = Fabricate.build(:wallet)
       expect(wallet).to be_valid
     end
-
-
   end
 end

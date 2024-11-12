@@ -38,7 +38,7 @@ class User < ApplicationRecord
   end
 
   def available_coins
-    wallet&.coins - blocked_coins
+    wallet&.coins&.- blocked_coins
   end
 
   private

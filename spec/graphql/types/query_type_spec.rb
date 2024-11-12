@@ -35,6 +35,25 @@ RSpec.describe Types::QueryType do
   end
 
   describe 'Me' do
-    context ''
+    let(:query) do
+      <<~GQL
+        query {
+          me {
+            id
+            blockedCoins
+            availableCoins
+          }
+        }
+      GQL
+    end
+
+    context 'when exists user' do
+      it 'returns user object' do
+        Fabricate :user
+        response = ProladdoreSchema.execute(query).as_json
+        data = response['data']['me']
+        expect(data).to have_key('id')
+      end
+    end
   end
 end

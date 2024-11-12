@@ -2,12 +2,12 @@
 
 module Types
   class UserType < Types::BaseObject
+    field :available_coins, Integer, null: false
     field :blocked_coins, Integer, null: false
     field :description, String, null: true
     field :email, String, null: false
     field :id, ID, null: false
     field :name, String, null: false
     field :role, String, null: false
-    field :available_coins, Integer, null: false
   end
 end

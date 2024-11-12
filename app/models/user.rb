@@ -5,7 +5,6 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
-#  description     :text
 #  email           :string           not null
 #  name            :string           not null
 #  password_digest :string           not null
@@ -20,8 +19,9 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :user_services, dependent: :destroy
-  has_many :services, through: :user_services
+  has_one :assistant, dependent: :destroy
+
+  has_many :hired_services, dependent: :destroy
 
   enum :role, { customer: 0, assistant: 1 }
 
@@ -29,4 +29,8 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true
+
+  def blocked_coins
+    hired_services.scheduled.joins(:assistant_service).sum("assistant_services.price")
+  end
 end

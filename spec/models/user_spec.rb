@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe User do
-  # Testa validações
   context 'validations' do
     it 'is valid with valid attributes' do
       user = Fabricate.build(:user)
@@ -36,23 +35,6 @@ RSpec.describe User do
     end
   end
 
-  # Testa as associações
-  context 'associations' do
-    it 'has many user_services' do
-      user = Fabricate(:user)
-      user_service = Fabricate(:user_service, user: user)
-      expect(user.user_services).to include(user_service)
-    end
-
-    it 'has many services through user_services' do
-      user = Fabricate(:user)
-      service = Fabricate(:service)
-      Fabricate(:user_service, user: user, service: service)
-      expect(user.services).to include(service)
-    end
-  end
-
-  # Testa enum de roles
   context 'enum roles' do
     it 'defaults to customer' do
       user = Fabricate(:user)
@@ -65,11 +47,28 @@ RSpec.describe User do
     end
   end
 
-  # Testa a normalização do email
   context 'email normalization' do
     it 'normalizes email to downcase and strips leading/trailing spaces' do
       user = Fabricate(:user, email: ' Test@Example.Com ')
       expect(user.email).to eq('test@example.com')
+    end
+  end
+
+  describe '#blocked_coins' do
+    context 'when there are no hired services' do
+      it 'returns 0' do
+        user = Fabricate(:user)
+        expect(user.blocked_coins).to eq(0)
+      end
+    end
+
+    context 'when there are hired services' do
+      it 'returns the sum of the prices of all scheduled hired services' do
+        user = Fabricate(:user)
+        Fabricate(:hired_service, user: user, status: :scheduled, assistant_service: Fabricate(:assistant_service, price: 10))
+        Fabricate(:hired_service, user: user, status: :scheduled, assistant_service: Fabricate(:assistant_service, price: 10))
+        expect(user.blocked_coins).to eq(20)
+      end
     end
   end
 end

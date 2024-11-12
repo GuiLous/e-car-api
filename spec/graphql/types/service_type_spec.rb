@@ -19,7 +19,7 @@ RSpec.describe Types::ServiceType do
     end
 
     it 'returns the expected fields for a user' do
-      assistant_service = Fabricate :user_service
+      assistant_service = Fabricate :assistant_service
       service = assistant_service.service
       response = ProladdoreSchema.execute(query).as_json
       data = response['data']['assistantServices'][0]['service']

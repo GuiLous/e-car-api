@@ -8,27 +8,30 @@ RSpec.describe Types::UserType do
       <<~GQL
         query {
           assistants {
-            id
-            name
-            email
-            role
-            description
+            user {
+              id
+              name
+              email
+              role
+              blockedCoins
+            }
           }
         }
       GQL
     end
 
     it 'returns the expected fields for a user' do
-      user = Fabricate :user, role: :assistant
+      assistant = Fabricate :assistant
+      user = assistant.user
 
       response = ProladdoreSchema.execute(query).as_json
-      data = response['data']['assistants'][0]
+      data = response['data']['assistants'][0]['user']
 
       expect(data['id']).to eq(user.id.to_s)
       expect(data['name']).to eq(user.name)
       expect(data['email']).to eq(user.email)
       expect(data['role']).to eq(user.role)
-      expect(data['description']).to eq(user.description)
+      expect(data['blockedCoins']).to eq(user.blocked_coins)
     end
   end
 end

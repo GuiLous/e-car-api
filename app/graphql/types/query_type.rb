@@ -3,14 +3,14 @@
 module Types
   class QueryType < Types::BaseObject
     field :assistant_services, [ Types::AssistantServiceType ], null: false
-    field :assistants, [ Types::UserType ], null: false
+    field :assistants, [ Types::AssistantType ], null: false
 
     def assistants
-      User.assistant.all
+      Assistant.all
     end
 
     def assistant_services
-      UserService.includes(:user, :service).all
+      AssistantService.includes(:assistant, :service).all
     end
   end
 end

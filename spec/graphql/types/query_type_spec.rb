@@ -23,9 +23,10 @@ RSpec.describe Types::QueryType do
       end
     end
 
-    context 'when exists users with assistant role' do
+    context 'when exists assistants' do
       it 'returns an arrays of assistants' do
-        Fabricate :user, role: :assistant
+        Fabricate :assistant
+
         response = ProladdoreSchema.execute(query).as_json
         data = response['data']['assistants']
         expect(data.size).to eq(1)

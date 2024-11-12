@@ -5,7 +5,6 @@
 # Table name: users
 #
 #  id              :bigint           not null, primary key
-#  description     :text
 #  email           :string           not null
 #  name            :string           not null
 #  password_digest :string           not null

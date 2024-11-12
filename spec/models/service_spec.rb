@@ -23,17 +23,17 @@ RSpec.describe Service do
   end
 
   context 'associations' do
-    it 'has many user_services' do
+    it 'has many assistant_services' do
       service = Fabricate(:service)
-      user_service = Fabricate(:user_service, service: service)
-      expect(service.user_services).to include(user_service)
+      assistant_service = Fabricate(:assistant_service, service: service)
+      expect(service.assistant_services).to include(assistant_service)
     end
 
-    it 'has many users through user_services' do
+    it 'has many assistants through assistant_services' do
       service = Fabricate(:service)
-      user = Fabricate(:user)
-      Fabricate(:user_service, service: service, user: user)
-      expect(service.users).to include(user)
+      assistant = Fabricate(:assistant)
+      Fabricate(:assistant_service, service: service, assistant: assistant)
+      expect(service.assistants).to include(assistant)
     end
   end
 end

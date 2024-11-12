@@ -8,5 +8,6 @@ module Types
     field :id, ID, null: false
     field :name, String, null: false
     field :role, String, null: false
+    field :available_coins, Integer, null: false
   end
 end

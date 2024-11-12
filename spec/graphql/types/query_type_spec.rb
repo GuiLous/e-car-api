@@ -33,4 +33,8 @@ RSpec.describe Types::QueryType do
       end
     end
   end
+
+  describe 'Me' do
+    context ''
+  end
 end

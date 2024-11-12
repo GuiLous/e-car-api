@@ -27,4 +27,9 @@ class AssistantService < ApplicationRecord
   has_many :hired_services, dependent: :destroy
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+
+  def hire(date:, user:)
+    raise Exceptions::SameUserError if assistant.user_id == user.id
+    hired_services.create(schedule_date: date, user: user)
+  end
 end

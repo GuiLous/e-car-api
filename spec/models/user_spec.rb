@@ -33,6 +33,11 @@ RSpec.describe User do
       expect(user).not_to be_valid
       expect(user.errors[:password]).to include("can't be blank")
     end
+
+    it 'should create a wallet' do
+      user = Fabricate(:user)
+      expect(user.wallet).to be_valid
+    end
   end
 
   context 'enum roles' do
@@ -68,6 +73,24 @@ RSpec.describe User do
         Fabricate(:hired_service, user: user, status: :scheduled, assistant_service: Fabricate(:assistant_service, price: 10))
         Fabricate(:hired_service, user: user, status: :scheduled, assistant_service: Fabricate(:assistant_service, price: 10))
         expect(user.blocked_coins).to eq(20)
+      end
+    end
+  end
+
+  describe '#available_coins' do
+    context 'when there are no hired services' do
+      it 'returns 100' do
+        user = Fabricate(:user)
+        user.wallet.update(coins: 100)
+        expect(user.available_coins).to eq(100)
+      end
+    end
+    context 'when there are hired services' do
+      it 'returns 50' do
+        user = Fabricate(:user)
+        user.wallet.update(coins: 100)
+        Fabricate(:hired_service, user: user,status: :scheduled, assistant_service: Fabricate(:assistant_service, price: 50))
+        expect(user.available_coins).to eq(50)
       end
     end
   end

@@ -55,36 +55,44 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
-    # services:
-    #  redis:
-    #    image: redis
-    #    ports:
-    #      - 6379:6379
-    #    options: --health-cmd "redis-cli ping" --health-interval 10s --health-timeout 5s --health-retries 5
+    services:
+      postgres:
+        image: postgres:12
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: proladdore_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/proladdore_test"
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips sqlite3
-
-      - name: Checkout code
+      - name: ExtraService code
         uses: actions/checkout@v4
-
-      - name: Set up Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
-
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
+          ruby-version: 3.3.6
+      - name: Ruby gem cache
+        uses: actions/cache@v1
         with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install gems
+        run: |
+          gem update --system --no-document
+          bundle config path vendor/bundle
+          bundle install --without development --jobs 4 --retry 3
+      - name: Set up database schema
+        run: bin/rails db:schema:load
+      - name: Run tests
+        run: bundle exec rspec
+      - name: Upload coverage results
+        uses: actions/upload-artifact@master
+        if: always()
+        with:
+          name: coverage-report
+          path: coverage

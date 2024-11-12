@@ -22,7 +22,6 @@ RSpec.describe Types::UserType do
       user = Fabricate :user, role: :assistant
 
       response = ProladdoreSchema.execute(query).as_json
-      puts response.inspect
       data = response['data']['assistants'][0]
 
       expect(data['id']).to eq(user.id.to_s)

@@ -6,4 +6,10 @@ module Exceptions
       super
     end
   end
+
+  class InsufficientCoinsError < StandardError
+    def initialize(msg = "INSUFFICIENT_COINS")
+      super
+    end
+  end
 end

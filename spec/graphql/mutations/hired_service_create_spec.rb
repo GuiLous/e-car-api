@@ -18,7 +18,8 @@ RSpec.describe Mutations::HiredServiceCreate do
 
     context 'when is another user' do
       it 'hire a service' do
-        Fabricate :user
+        user = Fabricate :user
+        user.wallet.update(coins: 10)
         assistant_service = Fabricate :assistant_service
 
         variables = {
@@ -32,11 +33,23 @@ RSpec.describe Mutations::HiredServiceCreate do
       end
     end
 
-    context 'when SameUserError is raised' do
-      before do
-        allow(HireAssistantService::CreateService.instance).to receive(:create).and_raise(Exceptions::SameUserError, 'SAME_USER_ERROR')
-      end
+    context 'when InsufficientCoinsError is raised' do
+      it 'returns a insufficient coins error' do
+        Fabricate :user
+        assistant_service = Fabricate :assistant_service, price: 10
 
+        variables = {
+          assistantServiceId: assistant_service.id,
+          scheduleDate: Time.zone.today
+        }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        error_message = response['errors'].first['message']
+        expect(error_message).to eq('INSUFFICIENT_COINS')
+      end
+    end
+
+    context 'when SameUserError is raised' do
       it 'returns a same user error' do
         assistant_service = Fabricate :assistant_service
 
@@ -52,11 +65,9 @@ RSpec.describe Mutations::HiredServiceCreate do
     end
 
     context 'when a StandardError is raised' do
-      before do
-        allow(HireAssistantService::CreateService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
-      end
-
       it 'returns a system error' do
+        allow(HireAssistantService::CreateService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
+
         variables = {
           assistantServiceId: 9999,
           scheduleDate: Time.zone.today

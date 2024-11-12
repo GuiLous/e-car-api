@@ -10,7 +10,7 @@ module Mutations
     def resolve(assistant_service_id:, schedule_date:)
       hired_service = HireAssistantService::CreateService.instance.create(assistant_service_id: assistant_service_id, schedule_date: schedule_date)
       { hired_service: hired_service }
-    rescue Exceptions::SameUserError => e
+    rescue Exceptions::InsufficientCoinsError, Exceptions::SameUserError => e
       raise GraphQL::ExecutionError, e.message
     rescue StandardError => e
       Rails.logger.error e.message

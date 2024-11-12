@@ -14,6 +14,7 @@ RSpec.describe Types::UserType do
               email
               role
               blockedCoins
+              availableCoins
             }
           }
         }
@@ -32,6 +33,7 @@ RSpec.describe Types::UserType do
       expect(data['email']).to eq(user.email)
       expect(data['role']).to eq(user.role)
       expect(data['blockedCoins']).to eq(user.blocked_coins)
+      expect(data['availableCoins']).to eq(user.available_coins)
     end
   end
 end

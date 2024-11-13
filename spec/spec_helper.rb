@@ -20,3 +20,10 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
+
+require 'sidekiq/testing'
+
+Sidekiq::Testing.fake!
+Sidekiq.configure_client do |config|
+  config.logger.level = Logger::WARN
+end

@@ -2,6 +2,7 @@
 
 module Types
   class UserType < Types::BaseObject
+    field :assistant, Types::AssistantType, null: true
     field :description, String, null: true
     field :email, String, null: false
     field :id, ID, null: false

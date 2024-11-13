@@ -13,6 +13,9 @@ RSpec.describe Types::UserType do
               name
               email
               role
+              assistant {
+                id
+              }
               wallet {
                 id
               }
@@ -33,6 +36,7 @@ RSpec.describe Types::UserType do
       expect(data['name']).to eq(user.name)
       expect(data['email']).to eq(user.email)
       expect(data['role']).to eq(user.role)
+      expect(data['assistant']['id']).to eq(assistant.id.to_s)
       expect(data['wallet']['id']).to eq(user.wallet.id.to_s)
     end
   end

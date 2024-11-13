@@ -23,4 +23,5 @@ class Assistant < ApplicationRecord
   belongs_to :user
   has_many :assistant_services, dependent: :destroy
   has_many :services, through: :assistant_services
+  has_many :hired_services, through: :assistant_services
 end

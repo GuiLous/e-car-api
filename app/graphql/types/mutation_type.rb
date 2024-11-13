@@ -2,12 +2,8 @@
 
 module Types
   class MutationType < Types::BaseObject
-    field :hired_service_create, mutation: Mutations::HiredServiceCreate
-    # TODO: remove me
-    field :test_field, String, null: false,
-                               description: "An example field added by the generator"
-    def test_field
-      "Hello World"
-    end
+    # Hired Services
+    field :finish_hired_service, mutation: Mutations::HiredServiceMutations::FinishHiredService
+    field :hire_assistant, mutation: Mutations::HiredServiceMutations::HireAssistant
   end
 end

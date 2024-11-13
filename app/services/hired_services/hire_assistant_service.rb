@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-module HireAssistantService
-  class CreateService
+module HiredServices
+  class HireAssistantService
     include Singleton
 
-    def create(assistant_service_id:, schedule_date:)
+    def hire(assistant_service_id:, schedule_date:)
       current_user = User.first
 
-      assistant_service = ::AssistantService.find(assistant_service_id)
+      assistant_service = AssistantService.find(assistant_service_id)
 
       raise Exceptions::InsufficientCoinsError if current_user.available_coins < assistant_service.price
 

@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Mutations::HiredServiceCreate do
+RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
         mutation($assistantServiceId: ID!, $scheduleDate: ISO8601Date!) {
-          hiredServiceCreate(assistantServiceId: $assistantServiceId, scheduleDate: $scheduleDate) {
+          hireAssistant(assistantServiceId: $assistantServiceId, scheduleDate: $scheduleDate) {
             hiredService {
               id
             }
@@ -28,7 +28,7 @@ RSpec.describe Mutations::HiredServiceCreate do
         }
 
         response = ProladdoreSchema.execute(mutation, variables: variables).as_json
-        data = response['data']['hiredServiceCreate']['hiredService']
+        data = response['data']['hireAssistant']['hiredService']
         expect(data['id']).to eq(HiredService.last.id.to_s)
       end
     end
@@ -66,7 +66,7 @@ RSpec.describe Mutations::HiredServiceCreate do
 
     context 'when a StandardError is raised' do
       it 'returns a system error' do
-        allow(HireAssistantService::CreateService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
+        allow(HiredServices::HireAssistantService.instance).to receive(:hire).and_raise(StandardError, 'SYSTEM_ERROR')
 
         variables = {
           assistantServiceId: 9999,

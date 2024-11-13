@@ -6,6 +6,7 @@
 #
 #  id                   :bigint           not null, primary key
 #  schedule_date        :date             not null
+#  start_date_analysis  :datetime
 #  status               :integer          default("scheduled"), not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null

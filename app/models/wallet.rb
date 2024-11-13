@@ -22,4 +22,12 @@ class Wallet < ApplicationRecord
   belongs_to :user
 
   validates :user_id, uniqueness: true
+
+  def add_coins(amount)
+    update!(coins: coins + amount)
+  end
+
+  def remove_coins(amount)
+    update!(coins: coins - amount)
+  end
 end

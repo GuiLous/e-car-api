@@ -1,0 +1,9 @@
+:scheduler:
+  :dynamic: true
+  :listened_queues_only: true
+  :schedule:
+    analyse_hired_service_job:
+      class: AnalyseHiredServiceJob
+      cron: "* * * * *"
+      queue: default
+:max_retries: 3

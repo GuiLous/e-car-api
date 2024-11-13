@@ -21,4 +21,8 @@ Fabricator(:user) do
   password { 'password123' }
   name { Faker::Name.name }
   role { 0 }
+
+  after_create do |user|
+    Fabricate(:wallet, user: user)
+  end
 end

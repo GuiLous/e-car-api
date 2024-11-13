@@ -49,7 +49,8 @@ RSpec.describe Types::QueryType do
 
     context 'when exists user' do
       it 'returns user object' do
-        Fabricate :user
+        user = Fabricate :user
+        allow(ENV).to receive(:fetch).with('LOGGED_USER_ID').and_return(user.id.to_s)
         response = ProladdoreSchema.execute(query).as_json
         data = response['data']['me']
         expect(data).to have_key('id')

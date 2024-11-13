@@ -20,5 +20,4 @@
 #
 Fabricator(:wallet) do
   coins { 0 }
-  user
 end

@@ -2,3 +2,4 @@ DATABASE_HOST: localhost
 DATABASE_USERNAME: postgres
 DATABASE_PASSWORD: postgres
 REDIS_URL: redis://localhost:6379/0
+LOGGED_USER_ID: 1

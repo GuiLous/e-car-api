@@ -15,7 +15,7 @@ module Types
     end
 
     def me
-      User.first
+      User.find(ENV.fetch("LOGGED_USER_ID"))
     end
   end
 end

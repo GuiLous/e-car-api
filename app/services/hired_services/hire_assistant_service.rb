@@ -9,7 +9,7 @@ module HiredServices
 
       assistant_service = AssistantService.find(assistant_service_id)
 
-      raise Exceptions::InsufficientCoinsError if current_user.available_coins < assistant_service.price
+      raise Exceptions::InsufficientCoinsError if current_user.wallet.available_coins < assistant_service.price
 
       assistant_service.hire(date: schedule_date, user: current_user)
     end

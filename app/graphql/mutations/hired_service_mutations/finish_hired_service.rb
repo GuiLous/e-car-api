@@ -9,6 +9,9 @@ module Mutations
 
       def resolve(hired_service_id:)
         HiredServices::UpdateToAnalizingService.instance.update_to_analizing(hired_service_id: hired_service_id)
+        { message: "SUCCESS" }
+      rescue StandardError
+        raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end
     end
   end

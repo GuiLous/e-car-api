@@ -8,8 +8,6 @@ module HiredServices
       hired_service = HiredService.find(hired_service_id)
 
       hired_service.update(status: :analyzing)
-
-      { message: "SUCCESS" }
     end
   end
 end

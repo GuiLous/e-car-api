@@ -21,13 +21,19 @@
 class Wallet < ApplicationRecord
   belongs_to :user
 
-  validates :user_id, uniqueness: true
-
   def add_coins(amount)
     update!(coins: coins + amount)
   end
 
   def remove_coins(amount)
     update!(coins: coins - amount)
+  end
+
+  def blocked_coins
+    user.hired_services.scheduled.joins(:assistant_service).sum("assistant_services.price")
+  end
+
+  def available_coins
+    coins - blocked_coins
   end
 end

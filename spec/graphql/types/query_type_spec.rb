@@ -40,8 +40,10 @@ RSpec.describe Types::QueryType do
         query {
           me {
             id
-            blockedCoins
-            availableCoins
+            wallet {
+              blockedCoins
+              availableCoins
+            }
           }
         }
       GQL

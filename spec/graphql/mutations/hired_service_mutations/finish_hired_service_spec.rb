@@ -14,17 +14,35 @@ RSpec.describe Mutations::HiredServiceMutations::FinishHiredService do
       GQL
     end
 
-    it 'updates hired service to analyzing' do
-      hired_service = Fabricate :hired_service
+    context 'when some errors ocurrs' do
+      it 'returns error' do
+        hired_service = Fabricate :hired_service
 
-      variables = {
-        hiredServiceId: hired_service.id
-      }
+        allow_any_instance_of(HiredServices::UpdateToAnalizingService).to receive(:update_to_analizing).and_raise(StandardError.new('Error'))
 
-      response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        variables = {
+          hiredServiceId: hired_service.id
+        }
 
-      data = response['data']['finishHiredService']['message']
-      expect(data).to eq('SUCCESS')
+        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        data = response['errors'][0]['message']
+        expect(data).to eq('SYSTEM_ERROR')
+      end
+    end
+
+    context 'when no errors ocurrs' do
+      it 'updates hired service to analyzing' do
+        hired_service = Fabricate :hired_service
+
+        variables = {
+          hiredServiceId: hired_service.id
+        }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+
+        data = response['data']['finishHiredService']['message']
+        expect(data).to eq('SUCCESS')
+      end
     end
   end
 end

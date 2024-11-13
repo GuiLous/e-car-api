@@ -30,12 +30,4 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true
-
-  def blocked_coins
-    hired_services.scheduled.joins(:assistant_service).sum("assistant_services.price")
-  end
-
-  def available_coins
-    wallet&.coins&.- blocked_coins
-  end
 end

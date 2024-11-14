@@ -24,6 +24,8 @@ module Mutations
           service_category_id: service_category_id
         )
         { message: "SUCCESS" }
+      rescue Exceptions::UserIsAlreadyAnAssistantError => e
+        raise GraphQL::ExecutionError, e.message
       rescue StandardError
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end

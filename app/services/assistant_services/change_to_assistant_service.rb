@@ -8,6 +8,8 @@ module AssistantServices
       ActiveRecord::Base.transaction do
         user = User.find(user_id)
 
+        raise Exceptions::UserIsAlreadyAnAssistantError if user.assistant.present?
+
         assistant = Assistant.new(user: user, nickname: nickname, description: description)
 
         raise ActiveRecord::RecordInvalid unless assistant.save

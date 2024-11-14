@@ -12,4 +12,10 @@ module Exceptions
       super
     end
   end
+
+  class UserIsAlreadyAnAssistantError < StandardError
+    def initialize(msg = "USER_ALREADY_AN_ASSISTANT")
+      super
+    end
+  end
 end

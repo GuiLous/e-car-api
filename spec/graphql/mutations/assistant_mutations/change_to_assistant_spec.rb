@@ -6,8 +6,8 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($userId: ID!, $nickname: String!, $description: String!, $modality: String!, $price: Int!, $serviceId: ID!) {
-          changeToAssistant(userId: $userId, nickname: $nickname, description: $description, modality: $modality, price: $price, serviceId: $serviceId) {
+        mutation($userId: ID!, $nickname: String!, $description: String!, $modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!) {
+          changeToAssistant(userId: $userId, nickname: $nickname, description: $description, modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
             message
           }
         }
@@ -17,16 +17,16 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
     context 'when no error occurs' do
       it 'change to assistant' do
         user = Fabricate :user, role: 1
-
         service = Fabricate :service
-
+        service_category = Fabricate :service_category
         variables = {
           userId: user.id,
           nickname: 'xpto',
           description: 'xpto',
           modality: 'live',
           price: 100,
-          serviceId: service.id
+          serviceId: service.id,
+          serviceCategoryId: service_category.id
         }
 
         response = ProladdoreSchema.execute(mutation, variables: variables).as_json
@@ -46,7 +46,8 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
           description: 'xpto',
           modality: 'live',
           price: 100,
-          serviceId: 9999
+          serviceId: 9999,
+          serviceCategoryId: 9999
         }
 
         response = ProladdoreSchema.execute(mutation, variables: variables).as_json

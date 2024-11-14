@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_14_145823) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_14_200719) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,7 +21,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_145823) do
     t.datetime "updated_at", null: false
     t.bigint "assistant_id"
     t.integer "modality", default: 0, null: false
+    t.bigint "service_category_id"
     t.index ["assistant_id"], name: "index_assistant_services_on_assistant_id"
+    t.index ["service_category_id"], name: "index_assistant_services_on_service_category_id"
     t.index ["service_id"], name: "index_assistant_services_on_service_id"
   end
 
@@ -45,6 +47,13 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_145823) do
     t.datetime "analysis_started_at"
     t.index ["assistant_service_id"], name: "index_hired_services_on_assistant_service_id"
     t.index ["user_id"], name: "index_hired_services_on_user_id"
+  end
+
+  create_table "service_categories", force: :cascade do |t|
+    t.string "name"
+    t.integer "type_category", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "services", force: :cascade do |t|
@@ -73,6 +82,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_145823) do
   end
 
   add_foreign_key "assistant_services", "assistants"
+  add_foreign_key "assistant_services", "service_categories"
   add_foreign_key "assistant_services", "services"
   add_foreign_key "assistants", "users"
   add_foreign_key "hired_services", "assistant_services"

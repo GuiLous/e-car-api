@@ -59,4 +59,48 @@ RSpec.describe Types::QueryType do
       end
     end
   end
+
+  describe 'ServiceCategories' do
+    let(:query) do
+      <<~GQL
+        query {
+          serviceCategories {
+            id
+            name
+            typeCategory
+          }
+        }
+      GQL
+    end
+
+    it 'returns service categories' do
+      Fabricate :service_category
+
+      response = ProladdoreSchema.execute(query).as_json
+      data = response['data']['serviceCategories']
+      expect(data.size).to eq(1)
+    end
+  end
+
+  describe 'Services' do
+    let(:query) do
+      <<~GQL
+        query {
+          services {
+            id
+            name
+            description
+          }
+        }
+      GQL
+    end
+
+    it 'returns services' do
+      Fabricate :service
+
+      response = ProladdoreSchema.execute(query).as_json
+      data = response['data']['services']
+      expect(data.size).to eq(1)
+    end
+  end
 end

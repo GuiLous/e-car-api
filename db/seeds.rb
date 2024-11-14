@@ -7,6 +7,13 @@ services << Fabricate(:service, name: 'Counter Strike')
 services << Fabricate(:service, name: 'Valorant')
 
 assistant = Fabricate(:assistant)
+
 services.each do |service|
   Fabricate(:assistant_service, price: rand(100..300), assistant: assistant, service: service)
+end
+
+categories = ['LOL', 'CS', 'Valorant']
+
+categories.each do |category|
+  Fabricate(:service_category, name: category, type_category: 0)
 end

@@ -4,13 +4,10 @@ module UserServices
   class CreatorService
     include Singleton
 
-    def create(email:, name:, password:)
-      user = ::User.new(email: email, name: name, password: password)
-
-      raise ActiveRecord::RecordInvalid unless user.save
-
-      Wallet.create(user: user)
-      user
+    def create(params)
+      User.create!(params).tap do |user|
+        Wallet.create(user: user) if user.persisted?
+      end
     end
   end
 end

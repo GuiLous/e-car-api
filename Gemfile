@@ -5,6 +5,8 @@ ruby "3.3.6"
 
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
+gem "devise"
+gem "devise-jwt"
 gem "fabrication"
 gem "faker"
 gem "figaro", "~> 1.2"

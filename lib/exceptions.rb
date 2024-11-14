@@ -18,4 +18,10 @@ module Exceptions
       super
     end
   end
+
+  class InvalidCredentialsError < StandardError
+    def initialize(msg = "INVALID_CREDENTIALS")
+      super
+    end
+  end
 end

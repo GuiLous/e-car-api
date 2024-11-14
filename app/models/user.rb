@@ -17,7 +17,13 @@
 #  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
-  has_secure_password
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: JwtDenylist
 
   has_one :assistant, dependent: :destroy
   has_one :wallet, dependent: :destroy
@@ -30,4 +36,14 @@ class User < ApplicationRecord
 
   validates :name, :email, presence: true
   validates :email, uniqueness: true
+
+  def generate_jwt
+    JWT.encode(
+      {
+        id: id,
+        exp: 24.hours.from_now.to_i
+      },
+      ENV.fetch("DEVISE_JWT_SECRET_KEY")
+    )
+  end
 end

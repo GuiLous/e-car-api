@@ -11,8 +11,7 @@ class GraphqlController < ApplicationController
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
-      # current_user: current_user,
+      current_user: current_user
     }
     result = ProladdoreSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
     render json: result
@@ -49,5 +48,21 @@ class GraphqlController < ApplicationController
     logger.error error.backtrace.join("\n")
 
     render json: { errors: [ { message: error.message, backtrace: error.backtrace } ], data: {} }, status: :internal_server_error
+  end
+
+  def current_user
+    return unless request.headers["Authorization"]
+
+    token = request.headers["Authorization"].split.last
+    decoded_token = JWT.decode(
+      token,
+      ENV.fetch("DEVISE_JWT_SECRET_KEY"),
+      true,
+      algorithm: "HS256"
+    )
+
+    User.find_by(id: decoded_token.first["id"])
+  rescue JWT::DecodeError
+    nil
   end
 end

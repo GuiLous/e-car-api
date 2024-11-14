@@ -5,6 +5,7 @@
 # Table name: assistant_services
 #
 #  id           :bigint           not null, primary key
+#  modality     :integer          default("live"), not null
 #  price        :integer          default(0), not null
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -25,6 +26,8 @@ class AssistantService < ApplicationRecord
   belongs_to :assistant
   belongs_to :service
   has_many :hired_services, dependent: :destroy
+
+  enum :modality, { live: 0, closed_package: 1 }
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
 

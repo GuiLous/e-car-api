@@ -31,8 +31,8 @@ RSpec.describe AssistantSubmissionsController do
 
   describe "POST #approve" do
     it "updates the status of the submission to approved" do
+      expect_any_instance_of(AssistantSubmissionServices::AcceptorService).to receive(:accept).with(assistant_submission_id: pending_submission.id.to_s)
       post :approve, params: { id: pending_submission.id }
-      expect(pending_submission.reload.status).to eq("approved")
     end
 
     it "returns error message when approval fails" do

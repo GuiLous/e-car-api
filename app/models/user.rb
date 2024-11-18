@@ -32,6 +32,7 @@ class User < ApplicationRecord
   has_one :wallet, dependent: :destroy
 
   has_many :hired_services, dependent: :destroy
+  has_many :assistant_submissions, dependent: :destroy
 
   enum :role, { customer: 0, assistant: 1 }
 

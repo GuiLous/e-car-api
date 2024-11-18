@@ -1,27 +1,35 @@
 # frozen_string_literal: true
 
 module Exceptions
-  class SameUserError < StandardError
-    def initialize(msg = "SAME_USER_ERROR")
+  class BaseError < StandardError
+    def initialize(msg = default_message)
       super
+    end
+
+    private
+
+    def default_message
+      self.class::MESSAGE
     end
   end
 
-  class InsufficientCoinsError < StandardError
-    def initialize(msg = "INSUFFICIENT_COINS")
-      super
-    end
+  class SameUserError < BaseError
+    MESSAGE = "SAME_USER_ERROR"
   end
 
-  class UserIsAlreadyAnAssistantError < StandardError
-    def initialize(msg = "USER_ALREADY_AN_ASSISTANT")
-      super
-    end
+  class InsufficientCoinsError < BaseError
+    MESSAGE = "INSUFFICIENT_COINS"
   end
 
-  class InvalidCredentialsError < StandardError
-    def initialize(msg = "INVALID_CREDENTIALS")
-      super
-    end
+  class UserIsAlreadyAnAssistantError < BaseError
+    MESSAGE = "USER_ALREADY_AN_ASSISTANT"
+  end
+
+  class InvalidCredentialsError < BaseError
+    MESSAGE = "INVALID_CREDENTIALS"
+  end
+
+  class UserHasPendingSubmissionError < BaseError
+    MESSAGE = "USER_HAS_PENDING_SUBMISSION"
   end
 end

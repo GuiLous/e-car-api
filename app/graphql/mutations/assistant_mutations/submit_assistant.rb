@@ -16,13 +16,13 @@ module Mutations
       def resolve(description:, modality:, price:, service_id:, service_category_id:)
         authenticate_user!
 
-        AssistantServices::ChangeToAssistantService.instance.change_to_assistant(
+        AssistantSubmissionServices::CreatorService.instance.create(
+          user: context[:current_user],
           description: description,
           modality: modality,
           price: price,
           service_id: service_id,
-          service_category_id: service_category_id,
-          context: context
+          service_category_id: service_category_id
         )
         { message: "SUCCESS" }
       rescue Exceptions::UserIsAlreadyAnAssistantError => e

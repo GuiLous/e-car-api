@@ -19,6 +19,6 @@ categories.each do |category|
   Fabricate(:service_category, name: category, type_category: 0)
 end
 
-10.times do
+30.times do
   Fabricate(:assistant_submission)
 end

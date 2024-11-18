@@ -22,7 +22,7 @@
 #
 Fabricator(:user) do
   email { Faker::Internet.email }
-  password { 'password123' }
+  password { 'Taller@123' }
   name { Faker::Name.name }
   role { 0 }
 

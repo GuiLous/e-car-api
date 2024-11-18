@@ -34,12 +34,32 @@ RSpec.describe AssistantSubmissionsController do
       post :approve, params: { id: pending_submission.id }
       expect(pending_submission.reload.status).to eq("approved")
     end
+
+    it "returns error message when approval fails" do
+      submission = pending_submission
+      allow(AssistantSubmission).to receive(:find).and_return(submission)
+      allow(submission).to receive(:update).and_return(false)
+
+      post :approve, params: { id: submission.id }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.parsed_body["error"]).to eq("Error approving the submission")
+    end
   end
 
   describe "POST #reject" do
     it "updates the status of the submission to rejected" do
       post :reject, params: { id: pending_submission.id }
       expect(pending_submission.reload.status).to eq("rejected")
+    end
+
+    it "returns error message when rejection fails" do
+      submission = pending_submission
+      allow(AssistantSubmission).to receive(:find).and_return(submission)
+      allow(submission).to receive(:update).and_return(false)
+
+      post :reject, params: { id: submission.id, format: :json }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.parsed_body["error"]).to eq("Error rejecting the submission")
     end
   end
 end

@@ -8,13 +8,19 @@ class AssistantSubmissionsController < ApplicationController
   end
 
   def approve
-    assistant_submission.approved!
-    redirect_to assistant_submissions_path
+    if assistant_submission.update(status: :approved)
+      redirect_to assistant_submissions_path
+    else
+      render json: { error: "Error approving the submission" }, status: :unprocessable_entity
+    end
   end
 
   def reject
-    assistant_submission.rejected!
-    redirect_to assistant_submissions_path
+    if assistant_submission.update(status: :rejected)
+      redirect_to assistant_submissions_path
+    else
+      render json: { error: "Error rejecting the submission" }, status: :unprocessable_entity
+    end
   end
 
   private

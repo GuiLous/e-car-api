@@ -7,7 +7,6 @@
 #  id          :bigint           not null, primary key
 #  description :text
 #  nickname    :string
-#  status      :integer          default("pending"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  user_id     :bigint           not null
@@ -25,6 +24,4 @@ class Assistant < ApplicationRecord
   has_many :assistant_services, dependent: :destroy
   has_many :services, through: :assistant_services
   has_many :hired_services, through: :assistant_services
-
-  enum :status, { pending: 0, approved: 1, reproved: 2 }
 end

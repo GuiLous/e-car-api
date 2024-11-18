@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_18_155910) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_18_182102) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,7 +41,9 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_155910) do
 
   create_table "assistant_submissions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.integer "status"
+    t.string "nickname", null: false
+    t.text "description"
+    t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_assistant_submissions_on_user_id"
@@ -53,7 +55,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_155910) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
     t.index ["user_id"], name: "index_assistants_on_user_id"
   end
 

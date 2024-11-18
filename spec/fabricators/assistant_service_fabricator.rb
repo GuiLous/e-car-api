@@ -21,9 +21,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_5c08927e25  (service_id => services.id)
+#  fk_rails_061e6d355b  (service_id => services.id)
 #  fk_rails_bfa43fb65f  (service_category_id => service_categories.id)
-#  fk_rails_ff3182149c  (assistant_id => assistants.id)
+#  fk_rails_fe3e91c4f7  (assistant_id => assistants.id)
 #
 Fabricator(:assistant_service) do
   price { 0 }

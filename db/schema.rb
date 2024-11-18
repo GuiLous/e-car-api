@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_14_230303) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_18_155910) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
 
   create_table "assistant_services", force: :cascade do |t|
     t.bigint "service_id", null: false
@@ -25,6 +37,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_230303) do
     t.index ["assistant_id"], name: "index_assistant_services_on_assistant_id"
     t.index ["service_category_id"], name: "index_assistant_services_on_service_category_id"
     t.index ["service_id"], name: "index_assistant_services_on_service_id"
+  end
+
+  create_table "assistant_submissions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_assistant_submissions_on_user_id"
   end
 
   create_table "assistants", force: :cascade do |t|
@@ -95,6 +115,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_230303) do
   add_foreign_key "assistant_services", "assistants"
   add_foreign_key "assistant_services", "service_categories"
   add_foreign_key "assistant_services", "services"
+  add_foreign_key "assistant_submissions", "users"
   add_foreign_key "assistants", "users"
   add_foreign_key "hired_services", "assistant_services"
   add_foreign_key "hired_services", "users"

@@ -1,0 +1,66 @@
+<div class="container-fluid py-4">
+  <div class="row mb-4">
+    <div class="col-md-12">
+      <h1 class="display-6 fw-bold text-default">Dashboard</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card shadow-sm">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Candidates to be reviewed</h5>
+          <span class="badge bg-primary"><%= @assistant_submissions.count %> submissions</span>
+        </div>
+        
+        <div class="card-body">
+          <% if @assistant_submissions.empty? %>
+            <div class="alert alert-info" role="alert">
+              <i class="bi bi-info-circle me-2"></i>
+              No assistant submissions found
+            </div>
+          <% else %>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @assistant_submissions.each do |assistant_submission| %>
+                    <tr>
+                      <td class="fw-medium"><%= assistant_submission.user.name %></td>
+                      <td>
+                        <span class="badge bg-<%= status_color(assistant_submission.status) %>">
+                          <%= assistant_submission.status %>
+                        </span>
+                      </td>
+                      <td>
+                        <div class="d-flex gap-2 justify-content-end">
+                          <%= button_to approve_dashboard_assistant_submission_path(assistant_submission),
+                                      method: :post,
+                                      class: 'btn btn-outline-success btn-sm' do %>
+                            <i class="bi bi-check-lg me-1"></i>Approve
+                          <% end %>
+                          
+                          <%= button_to reject_dashboard_assistant_submission_path(assistant_submission),
+                                      method: :post, 
+                                      class: 'btn btn-outline-danger btn-sm' do %>
+                            <i class="bi bi-x-lg me-1"></i>Reject
+                          <% end %>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

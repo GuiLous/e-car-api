@@ -28,6 +28,8 @@ Devise.setup do |config|
   config.responder.error_status = :unprocessable_entity
   config.responder.redirect_status = :see_other
 
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
+
   config.jwt do |jwt|
     jwt.secret = ENV.fetch('DEVISE_JWT_SECRET_KEY')
     jwt.dispatch_requests = [
@@ -38,5 +40,7 @@ Devise.setup do |config|
     ]
     jwt.expiration_time = 1.day.to_i
   end
+
+  config.allow_unconfirmed_access_for = nil
 
 end

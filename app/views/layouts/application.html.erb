@@ -29,6 +29,7 @@
   </head>
 
   <body>
+    <%= render "layouts/shared/nav" if admin_signed_in? %>
     <div class="container-fluid">
       <%= yield %>
     </div>

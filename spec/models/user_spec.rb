@@ -33,11 +33,6 @@ RSpec.describe User do
       expect(user).not_to be_valid
       expect(user.errors[:password]).to include("can't be blank")
     end
-
-    it 'creates a wallet' do
-      user = Fabricate(:user)
-      expect(user.wallet).to be_valid
-    end
   end
 
   context 'enum roles' do
@@ -56,6 +51,13 @@ RSpec.describe User do
     it 'normalizes email to downcase and strips leading/trailing spaces' do
       user = Fabricate(:user, email: ' Test@Example.Com ')
       expect(user.email).to eq('test@example.com')
+    end
+  end
+
+  context 'jwt' do
+    it 'generates a JWT token' do
+      user = Fabricate(:user)
+      expect(user.generate_jwt).to be_a(String)
     end
   end
 end

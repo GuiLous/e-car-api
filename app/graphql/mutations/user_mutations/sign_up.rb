@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Mutations
-  module AuthMutations
+  module UserMutations
     class SignUp < BaseMutation
       argument :email, String
       argument :name, String
       argument :password, String
       argument :password_confirmation, String
-      argument :role, String, required: false, default_value: "member"
+      argument :role, String, required: false, default_value: "customer"
 
       field :token, String, null: true
 

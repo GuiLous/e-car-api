@@ -69,5 +69,31 @@ RSpec.describe GraphqlController do
         expect(json_response['data']).to eq({})
       end
     end
+
+    describe '#current_user' do
+      let(:user) { Fabricate :user }
+      let(:token) { JWT.encode({ id: user.id }, ENV.fetch('DEVISE_JWT_SECRET_KEY', nil), 'HS256') }
+
+      context 'when Authorization header is present' do
+        before do
+          request.headers['Authorization'] = "Bearer #{token}"
+        end
+
+        it 'returns the user when token is valid' do
+          expect(controller.send(:current_user)).to eq(user)
+        end
+
+        it 'returns nil when token is invalid' do
+          request.headers['Authorization'] = 'Bearer invalid_token'
+          expect(controller.send(:current_user)).to be_nil
+        end
+      end
+
+      context 'when Authorization header is not present' do
+        it 'returns nil' do
+          expect(controller.send(:current_user)).to be_nil
+        end
+      end
+    end
   end
 end

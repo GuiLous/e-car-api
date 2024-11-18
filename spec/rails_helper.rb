@@ -16,6 +16,10 @@ SimpleCov.start do
   add_filter '/config/'
   add_filter '/app/graphql/proladdore_schema.rb'
   add_filter '/spec/'
+
+  add_group 'Models', 'app/models'
+  enable_coverage :branch # Habilita cobertura de branches
+
   minimum_coverage 100
 end
 
@@ -24,6 +28,9 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+require 'devise'
+
 RSpec.configure do |config|
   config.fixture_paths = [
     Rails.root.join('spec/fixtures')
@@ -31,6 +38,10 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
 
 require 'shoulda/matchers'

@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_18_182102) do
 
   create_table "assistant_submissions", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.string "nickname", null: false
     t.text "description"
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false

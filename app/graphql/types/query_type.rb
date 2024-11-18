@@ -6,7 +6,7 @@ module Types
 
     field :assistant_services, [ Types::AssistantServiceType ], null: false
     field :assistants, [ Types::AssistantType ], null: false
-    field :me, Types::UserType, null: false
+    field :me, Types::UserType, null: true
     field :service_categories, [ Types::ServiceCategoryType ], null: false
     field :services, [ Types::ServiceType ], null: false
 
@@ -31,8 +31,6 @@ module Types
     end
 
     def me
-      authenticate_user!
-
       context[:current_user]
     end
   end

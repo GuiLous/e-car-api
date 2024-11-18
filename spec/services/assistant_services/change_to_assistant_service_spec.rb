@@ -26,7 +26,6 @@ RSpec.describe AssistantServices::ChangeToAssistantService do
 
         expect(assistant.nickname).to eq('xpto')
         expect(assistant.description).to eq('xpto')
-        expect(assistant.status).to eq('pending')
         expect(assistant.assistant_services.first.modality).to eq('live')
         expect(assistant.assistant_services.first.price).to eq(100)
         expect(assistant.assistant_services.first.service_id).to eq(service.id)

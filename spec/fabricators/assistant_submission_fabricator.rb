@@ -23,4 +23,6 @@
 Fabricator(:assistant_submission) do
   user { Fabricate(:user) }
   status { AssistantSubmission.statuses.keys.sample }
+  service { Fabricate(:service) }
+  service_category { Fabricate(:service_category) }
 end

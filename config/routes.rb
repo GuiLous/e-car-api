@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   end
 
   post "/graphql", to: "graphql#execute"
+
+  get "dashboard", to: "dashboard#index"
   
   get "up" => "rails/health#show", as: :rails_health_check
  

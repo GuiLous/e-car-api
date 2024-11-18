@@ -4,7 +4,7 @@ class AssistantSubmissionsController < ApplicationController
   before_action :authenticate_admin!
 
   def index
-    @assistant_submissions = AssistantSubmission.all
+    @assistant_submissions = AssistantSubmission.pending
   end
 
   def approve

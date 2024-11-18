@@ -1,3 +1,4 @@
+Admin.create!(email: 'dev@taller.net.br', password: '123456', password_confirmation: '123456')
 user = Fabricate :user
 user.wallet.add_coins(1000)
 

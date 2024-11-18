@@ -11,7 +11,7 @@ module AuthServices
 
       token = user.generate_jwt
 
-      { token: token }
+      { user: user, token: token }
     end
   end
 end

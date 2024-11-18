@@ -7,6 +7,7 @@ module Mutations
       argument :password, String, required: true
 
       field :token, String, null: true
+      field :user, Types::UserType, null: true
 
       def resolve(email:, password:)
         AuthServices::SignInService.instance.sign_in(email: email, password: password)

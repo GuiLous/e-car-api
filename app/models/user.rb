@@ -45,6 +45,9 @@ class User < ApplicationRecord
     JWT.encode(
       {
         id: id,
+        role: role,
+        email: email,
+        name: name,
         exp: 24.hours.from_now.to_i
       },
       ENV.fetch("DEVISE_JWT_SECRET_KEY")

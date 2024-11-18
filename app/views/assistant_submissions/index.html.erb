@@ -40,17 +40,61 @@
                       </td>
                       <td>
                         <div class="d-flex gap-2 justify-content-end">
-                          <%= button_to approve_assistant_submission_path(assistant_submission),
-                                      method: :post,
-                                      class: 'btn btn-outline-success btn-sm' do %>
+                          <button type="button"
+                                  class="btn btn-outline-success btn-sm"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#approveModal<%= assistant_submission.id %>">
                             <i class="bi bi-check-lg me-1"></i>Approve
-                          <% end %>
+                          </button>
                           
-                          <%= button_to reject_assistant_submission_path(assistant_submission),
-                                      method: :post, 
-                                      class: 'btn btn-outline-danger btn-sm' do %>
+                          <button type="button"
+                                  class="btn btn-outline-danger btn-sm"
+                                  data-bs-toggle="modal"
+                                  data-bs-target="#rejectModal<%= assistant_submission.id %>">
                             <i class="bi bi-x-lg me-1"></i>Reject
-                          <% end %>
+                          </button>
+
+                          <div class="modal fade" id="approveModal<%= assistant_submission.id %>" tabindex="-1">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Confirm Approval</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                  Are you sure you want to approve <%= assistant_submission.user.name %>'s submission?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                  <%= button_to "Confirm Approval",
+                                              approve_assistant_submission_path(assistant_submission),
+                                              method: :post,
+                                              class: 'btn btn-success' %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="modal fade" id="rejectModal<%= assistant_submission.id %>" tabindex="-1">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title">Confirm Rejection</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+                                <div class="modal-body">
+                                  Are you sure you want to reject <%= assistant_submission.user.name %>'s submission?
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                  <%= button_to "Confirm Rejection",
+                                              reject_assistant_submission_path(assistant_submission),
+                                              method: :post,
+                                              class: 'btn btn-danger' %>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </td>
                     </tr>

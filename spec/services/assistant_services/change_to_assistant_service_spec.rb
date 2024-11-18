@@ -13,7 +13,6 @@ RSpec.describe AssistantServices::ChangeToAssistantService do
         context = { current_user: user }
 
         described_class.instance.change_to_assistant(
-          nickname: 'xpto',
           description: 'xpto',
           modality: 'live',
           price: 100,
@@ -24,7 +23,6 @@ RSpec.describe AssistantServices::ChangeToAssistantService do
 
         assistant = user.assistant.reload
 
-        expect(assistant.nickname).to eq('xpto')
         expect(assistant.description).to eq('xpto')
         expect(assistant.assistant_services.first.modality).to eq('live')
         expect(assistant.assistant_services.first.price).to eq(100)
@@ -46,7 +44,6 @@ RSpec.describe AssistantServices::ChangeToAssistantService do
 
         expect do
           described_class.instance.change_to_assistant(
-            nickname: 'xpto',
             description: 'xpto',
             modality: 'live',
             price: 100,

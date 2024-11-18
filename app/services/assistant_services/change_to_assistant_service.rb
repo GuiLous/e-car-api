@@ -4,13 +4,13 @@ module AssistantServices
   class ChangeToAssistantService
     include Singleton
 
-    def change_to_assistant(nickname:, description:, modality:, price:, service_id:, service_category_id:, context:)
+    def change_to_assistant(description:, modality:, price:, service_id:, service_category_id:, context:)
       ActiveRecord::Base.transaction do
         user = context[:current_user]
 
         raise Exceptions::UserIsAlreadyAnAssistantError if user.assistant.present?
 
-        assistant = Assistant.new(user: user, nickname: nickname, description: description)
+        assistant = Assistant.new(user: user, description: description)
 
         raise ActiveRecord::RecordInvalid unless assistant.save
 

@@ -5,7 +5,6 @@ module Types
     field :description, String, null: true
     field :hired_services, [ Types::HiredServiceType ], null: true
     field :id, ID, null: false
-    field :nickname, String, null: false
     field :status, String, null: false
     field :user, Types::UserType, null: false
   end

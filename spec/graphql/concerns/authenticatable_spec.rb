@@ -15,7 +15,7 @@ RSpec.describe Authenticatable do
   describe '#authenticate_user!' do
     context 'when current_user exists in context' do
       before do
-        instance.context = { current_user: double('User') }
+        instance.context = { current_user: instance_double(User) }
       end
 
       it 'does not raise an error' do

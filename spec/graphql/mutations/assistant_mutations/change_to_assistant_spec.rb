@@ -6,8 +6,8 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($nickname: String!, $description: String!, $modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!) {
-          changeToAssistant(nickname: $nickname, description: $description, modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
+        mutation($description: String!, $modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!) {
+          changeToAssistant(description: $description, modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
             message
           }
         }
@@ -21,7 +21,6 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
         service_category = Fabricate :service_category
 
         variables = {
-          nickname: 'xpto',
           description: 'xpto',
           modality: 'live',
           price: 100,
@@ -45,7 +44,6 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
           allow(AssistantServices::ChangeToAssistantService.instance).to receive(:change_to_assistant).and_raise(StandardError, 'SYSTEM_ERROR')
 
           variables = {
-            nickname: 'xpto',
             description: 'xpto',
             modality: 'live',
             price: 100,
@@ -70,7 +68,6 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
           service_category = Fabricate :service_category
 
           variables = {
-            nickname: 'xpto',
             description: 'xpto',
             modality: 'live',
             price: 100,

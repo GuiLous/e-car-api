@@ -11,7 +11,6 @@ RSpec.describe Types::AssistantType do
             assistant {
               description
               id
-              nickname
               user {
                 id
               }
@@ -37,7 +36,6 @@ RSpec.describe Types::AssistantType do
 
       expect(data['id']).to eq(assistant.id.to_s)
       expect(data['description']).to eq(assistant.description)
-      expect(data['nickname']).to eq(assistant.nickname)
       expect(data['user']['id']).to eq(user.id.to_s)
       expect(data['hiredServices'].size).to eq(1)
     end

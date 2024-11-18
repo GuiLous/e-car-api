@@ -1,2 +1,0 @@
-Fabricator(:test) do
-end

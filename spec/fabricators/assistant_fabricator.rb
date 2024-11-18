@@ -20,7 +20,6 @@
 #  fk_rails_9ac4b9e2cd  (user_id => users.id)
 #
 Fabricator(:assistant) do
-  nickname { Faker::Name.name }
   description { Faker::Lorem.sentence }
   user { Fabricate :user, role: :assistant }
 end

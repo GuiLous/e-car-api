@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe Dashboard::AssistantSubmissionsHelper do # rubocop:disable RSpec/SpecFilePathFormat
+RSpec.describe AssistantSubmissionsHelper do
   describe "#status_color" do
     it "returns the correct color for pending status" do
       expect(helper.status_color("pending")).to eq("warning")

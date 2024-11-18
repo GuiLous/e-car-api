@@ -1,21 +1,17 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  root "dashboard#index"
-
+  root :to => "assistant_submissions#index"
+  
   devise_for :admins
 
   authenticate :admin do
     mount Sidekiq::Web => '/sidekiq'
     
-    get "dashboard", to: "dashboard#index"
-    
-    namespace :dashboard do
-      resources :assistant_submissions do
-        member do
-          post :approve
-          post :reject
-        end
+    resources :assistant_submissions do
+      member do
+        post :approve
+        post :reject
       end
     end
   end

@@ -40,13 +40,13 @@
                       </td>
                       <td>
                         <div class="d-flex gap-2 justify-content-end">
-                          <%= button_to approve_dashboard_assistant_submission_path(assistant_submission),
+                          <%= button_to approve_assistant_submission_path(assistant_submission),
                                       method: :post,
                                       class: 'btn btn-outline-success btn-sm' do %>
                             <i class="bi bi-check-lg me-1"></i>Approve
                           <% end %>
                           
-                          <%= button_to reject_dashboard_assistant_submission_path(assistant_submission),
+                          <%= button_to reject_assistant_submission_path(assistant_submission),
                                       method: :post, 
                                       class: 'btn btn-outline-danger btn-sm' do %>
                             <i class="bi bi-x-lg me-1"></i>Reject

@@ -13,6 +13,9 @@ RSpec.describe Types::UserType do
               name
               email
               role
+              assistantSubmission {
+                id
+              }
               assistant {
                 id
               }
@@ -28,6 +31,7 @@ RSpec.describe Types::UserType do
     it 'returns the expected fields for a user' do
       assistant = Fabricate :assistant
       user = assistant.user
+      submission = Fabricate :assistant_submission, description: 'xpto'
 
       response = ProladdoreSchema.execute(query).as_json
       data = response['data']['assistants'][0]['user']
@@ -38,6 +42,7 @@ RSpec.describe Types::UserType do
       expect(data['role']).to eq(user.role)
       expect(data['assistant']['id']).to eq(assistant.id.to_s)
       expect(data['wallet']['id']).to eq(user.wallet.id.to_s)
+      expect(data['assistantSubmission']['id']).to eq(submission.id.to_s)
     end
   end
 end

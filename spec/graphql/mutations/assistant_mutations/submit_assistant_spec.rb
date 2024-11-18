@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
+RSpec.describe Mutations::AssistantMutations::SubmitAssistant do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
         mutation($description: String!, $modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!) {
-          changeToAssistant(description: $description, modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
+          submitAssistant(description: $description, modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
             message
           }
         }
@@ -31,7 +31,7 @@ RSpec.describe Mutations::AssistantMutations::ChangeToAssistant do
         context = { current_user: user }
 
         response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
-        data = response['data']['changeToAssistant']['message']
+        data = response['data']['submitAssistant']['message']
         expect(data).to eq('SUCCESS')
       end
     end

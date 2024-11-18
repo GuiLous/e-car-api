@@ -13,6 +13,6 @@ module Types
     field :hire_assistant, mutation: Mutations::HiredServiceMutations::HireAssistant
 
     # Assistant
-    field :change_to_assistant, mutation: Mutations::AssistantMutations::ChangeToAssistant
+    field :submit_assistant, mutation: Mutations::AssistantMutations::SubmitAssistant
   end
 end

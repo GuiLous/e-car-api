@@ -2,7 +2,7 @@
 
 module Mutations
   module AssistantMutations
-    class ChangeToAssistant < BaseMutation
+    class SubmitAssistant < BaseMutation
       include ::Authenticatable
 
       field :message, String, null: false

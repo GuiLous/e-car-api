@@ -52,8 +52,10 @@ RSpec.describe Types::QueryType do
     context 'when exists user' do
       it 'returns user object' do
         user = Fabricate :user
-        allow(ENV).to receive(:fetch).with('LOGGED_USER_ID').and_return(user.id.to_s)
-        response = ProladdoreSchema.execute(query).as_json
+
+        context = { current_user: user }
+
+        response = ProladdoreSchema.execute(query, context: context).as_json
         data = response['data']['me']
         expect(data).to have_key('id')
       end
@@ -74,9 +76,13 @@ RSpec.describe Types::QueryType do
     end
 
     it 'returns service categories' do
+      user = Fabricate :user
+
       Fabricate :service_category
 
-      response = ProladdoreSchema.execute(query).as_json
+      context = { current_user: user }
+
+      response = ProladdoreSchema.execute(query, context: context).as_json
       data = response['data']['serviceCategories']
       expect(data.size).to eq(1)
     end
@@ -98,7 +104,11 @@ RSpec.describe Types::QueryType do
     it 'returns services' do
       Fabricate :service
 
-      response = ProladdoreSchema.execute(query).as_json
+      user = Fabricate :user
+
+      context = { current_user: user }
+
+      response = ProladdoreSchema.execute(query, context: context).as_json
       data = response['data']['services']
       expect(data.size).to eq(1)
     end

@@ -21,9 +21,10 @@ RSpec.describe Types::WalletType do
     it 'returns the expected fields for a user' do
       user = Fabricate :user
       wallet = user.wallet
-      allow(ENV).to receive(:fetch).with('LOGGED_USER_ID').and_return(user.id.to_s)
 
-      response = ProladdoreSchema.execute(query).as_json
+      context = { current_user: user }
+
+      response = ProladdoreSchema.execute(query, context: context).as_json
       data = response['data']['me']['wallet']
 
       expect(data['id']).to eq(wallet.id.to_s)

@@ -27,7 +27,10 @@ RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
           scheduleDate: Time.zone.today
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        context = { current_user: user }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
+
         data = response['data']['hireAssistant']['hiredService']
         expect(data['id']).to eq(HiredService.last.id.to_s)
       end
@@ -35,7 +38,7 @@ RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
 
     context 'when InsufficientCoinsError is raised' do
       it 'returns a insufficient coins error' do
-        Fabricate :user
+        user = Fabricate :user
         assistant_service = Fabricate :assistant_service, price: 10
 
         variables = {
@@ -43,7 +46,9 @@ RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
           scheduleDate: Time.zone.today
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        context = { current_user: user }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
         error_message = response['errors'].first['message']
         expect(error_message).to eq('INSUFFICIENT_COINS')
       end
@@ -58,7 +63,9 @@ RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
           scheduleDate: Time.zone.today
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        context = { current_user: assistant_service.assistant.user }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
         error_message = response['errors'].first['message']
         expect(error_message).to eq('SAME_USER_ERROR')
       end
@@ -66,6 +73,7 @@ RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
 
     context 'when a StandardError is raised' do
       it 'returns a system error' do
+        user = Fabricate :user
         allow(HiredServices::HireAssistantService.instance).to receive(:hire).and_raise(StandardError, 'SYSTEM_ERROR')
 
         variables = {
@@ -73,7 +81,9 @@ RSpec.describe Mutations::HiredServiceMutations::HireAssistant do
           scheduleDate: Time.zone.today
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        context = { current_user: user }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
         error_message = response['errors'].first['message']
         expect(error_message).to eq('SYSTEM_ERROR')
       end

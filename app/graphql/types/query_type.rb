@@ -2,6 +2,8 @@
 
 module Types
   class QueryType < Types::BaseObject
+    include ::Authenticatable
+
     field :assistant_services, [ Types::AssistantServiceType ], null: false
     field :assistants, [ Types::AssistantType ], null: false
     field :me, Types::UserType, null: false
@@ -17,15 +19,21 @@ module Types
     end
 
     def services
+      authenticate_user!
+
       Service.all
     end
 
     def service_categories
+      authenticate_user!
+
       ServiceCategory.all
     end
 
     def me
-      User.find(ENV.fetch("LOGGED_USER_ID"))
+      authenticate_user!
+
+      context[:current_user]
     end
   end
 end

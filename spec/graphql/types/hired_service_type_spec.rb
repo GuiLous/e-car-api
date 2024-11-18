@@ -34,7 +34,9 @@ RSpec.describe Types::HiredServiceType do
       hired_service = Fabricate :hired_service, assistant_service: assistant_service
       allow(ENV).to receive(:fetch).with('LOGGED_USER_ID').and_return(user.id.to_s)
 
-      response = ProladdoreSchema.execute(query).as_json
+      context = { current_user: user }
+
+      response = ProladdoreSchema.execute(query, context: context).as_json
       data = response['data']['me']['assistant']['hiredServices'][0]
 
       expect(data['id']).to eq(hired_service.id.to_s)

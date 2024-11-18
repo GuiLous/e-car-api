@@ -10,14 +10,16 @@ RSpec.describe AssistantServices::ChangeToAssistantService do
         service = Fabricate(:service)
         service_category = Fabricate(:service_category)
 
+        context = { current_user: user }
+
         described_class.instance.change_to_assistant(
-          user_id: user.id,
           nickname: 'xpto',
           description: 'xpto',
           modality: 'live',
           price: 100,
           service_id: service.id,
-          service_category_id: service_category.id
+          service_category_id: service_category.id,
+          context: context
         )
 
         assistant = user.assistant.reload
@@ -41,15 +43,17 @@ RSpec.describe AssistantServices::ChangeToAssistantService do
         service = Fabricate(:service)
         service_category = Fabricate(:service_category)
 
+        context = { current_user: user }
+
         expect do
           described_class.instance.change_to_assistant(
-            user_id: user.id,
             nickname: 'xpto',
             description: 'xpto',
             modality: 'live',
             price: 100,
             service_id: service.id,
-            service_category_id: service_category.id
+            service_category_id: service_category.id,
+            context: context
           )
         end.to raise_error(Exceptions::UserIsAlreadyAnAssistantError)
       end

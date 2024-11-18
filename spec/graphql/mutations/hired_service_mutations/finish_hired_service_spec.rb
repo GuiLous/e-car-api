@@ -16,6 +16,7 @@ RSpec.describe Mutations::HiredServiceMutations::FinishHiredService do
 
     context 'when some errors ocurrs' do
       it 'returns error' do
+        user = Fabricate :user
         hired_service = Fabricate :hired_service
 
         allow_any_instance_of(HiredServices::UpdateToAnalizingService).to receive(:update_to_analizing).and_raise(StandardError.new('Error'))
@@ -24,7 +25,9 @@ RSpec.describe Mutations::HiredServiceMutations::FinishHiredService do
           hiredServiceId: hired_service.id
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        context = { current_user: user }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
         data = response['errors'][0]['message']
         expect(data).to eq('SYSTEM_ERROR')
       end
@@ -32,13 +35,16 @@ RSpec.describe Mutations::HiredServiceMutations::FinishHiredService do
 
     context 'when no errors ocurrs' do
       it 'updates hired service to analyzing' do
+        user = Fabricate :user
         hired_service = Fabricate :hired_service
 
         variables = {
           hiredServiceId: hired_service.id
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        context = { current_user: user }
+
+        response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
 
         data = response['data']['finishHiredService']['message']
         expect(data).to eq('SUCCESS')

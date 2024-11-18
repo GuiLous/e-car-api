@@ -29,9 +29,9 @@ RSpec.describe Types::AssistantType do
       user = assistant.user
       assistant_service = Fabricate :assistant_service, assistant: assistant
       Fabricate :hired_service, assistant_service: assistant_service
-      allow(ENV).to receive(:fetch).with('LOGGED_USER_ID').and_return(user.id.to_s)
 
-      response = ProladdoreSchema.execute(query).as_json
+      context = { current_user: user }
+      response = ProladdoreSchema.execute(query, context: context).as_json
 
       data = response['data']['me']['assistant']
 

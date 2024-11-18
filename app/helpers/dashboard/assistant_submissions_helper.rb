@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Dashboard
   module AssistantSubmissionsHelper
     def status_color(status)

@@ -3,5 +3,9 @@
 class AssistantSubmission < ApplicationRecord
   belongs_to :user
 
-  enum :status, { pending: 1, approved: 2, rejected: 3 }
+  enum :status, {
+    pending: 0,
+    approved: 1,
+    rejected: 2
+  }
 end

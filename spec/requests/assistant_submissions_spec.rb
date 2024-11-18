@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe "AssistantSubmissions" do
-  let(:admin) { create(:admin) }
+  let(:admin) { Fabricate(:admin) }
 
   before do
     sign_in admin
@@ -18,7 +18,7 @@ RSpec.describe "AssistantSubmissions" do
   end
 
   describe "POST /dashboard/assistant_submissions/:id/approve" do
-    let(:submission) { create(:assistant_submission) }
+    let(:submission) { Fabricate(:assistant_submission) }
 
     it "returns http success" do
       post "/dashboard/assistant_submissions/#{submission.id}/approve"
@@ -28,7 +28,7 @@ RSpec.describe "AssistantSubmissions" do
   end
 
   describe "POST /dashboard/assistant_submissions/:id/reject" do
-    let(:submission) { create(:assistant_submission) }
+    let(:submission) { Fabricate(:assistant_submission) }
 
     it "returns http success" do
       post "/dashboard/assistant_submissions/#{submission.id}/reject"

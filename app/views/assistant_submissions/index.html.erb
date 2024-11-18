@@ -6,7 +6,7 @@
   </div>
 
   <% flash.each do |type, message| %>
-    <div class="alert alert-<%= type == 'success' ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
+    <div class="alert alert-<%= ['success', 'notice'].include?(type) ? 'success' : 'danger' %> alert-dismissible fade show" role="alert">
       <%= message %>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>

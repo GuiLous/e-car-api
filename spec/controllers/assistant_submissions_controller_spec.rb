@@ -31,18 +31,18 @@ RSpec.describe AssistantSubmissionsController do
 
   describe "POST #approve" do
     it "updates the status of the submission to approved" do
-      expect_any_instance_of(AssistantSubmissionServices::AcceptorService).to receive(:accept).with(assistant_submission_id: pending_submission.id.to_s)
       post :approve, params: { id: pending_submission.id }
+      expect(pending_submission.reload.status).to eq("approved")
     end
 
     it "returns error message when approval fails" do
-      submission = pending_submission
-      allow(AssistantSubmission).to receive(:find).and_return(submission)
-      allow(submission).to receive(:update).and_return(false)
+      mock_service = instance_double(AssistantSubmissionServices::AcceptorService)
+      allow(AssistantSubmissionServices::AcceptorService).to receive(:instance).and_return(mock_service)
+      allow(mock_service).to receive(:accept).and_raise(StandardError.new("Erro ao aprovar"))
 
-      post :approve, params: { id: submission.id }
-      expect(response).to have_http_status(:unprocessable_entity)
-      expect(response.parsed_body["error"]).to eq("Error approving the submission")
+      post :approve, params: { id: pending_submission.id }
+      expect(response).to redirect_to(assistant_submissions_path)
+      expect(flash[:error]).to eq("Erro ao aprovar a submissão")
     end
   end
 

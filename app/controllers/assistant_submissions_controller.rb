@@ -8,9 +8,12 @@ class AssistantSubmissionsController < ApplicationController
   end
 
   def approve
-    submission_accepted = AssistantSubmissionServices::AcceptorService.instance.accept(assistant_submission_id: params[:id])
-
-    render json: { error: "Error approving the submission" }, status: :unprocessable_entity if submission_accepted
+    AssistantSubmissionServices::AcceptorService.instance.accept(
+      assistant_submission_id: params[:id]
+    )
+    redirect_to assistant_submissions_path, notice: "Submissão aprovada com sucesso"
+  rescue StandardError
+    redirect_to assistant_submissions_path, flash: { error: "Erro ao aprovar a submissão" }
   end
 
   def reject

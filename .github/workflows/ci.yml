@@ -67,6 +67,7 @@ jobs:
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://postgres:postgres@localhost:5432/proladdore_test"
+      DEVISE_JWT_SECRET_KEY: "Taller@123"
     steps:
       - name: ExtraService code
         uses: actions/checkout@v4

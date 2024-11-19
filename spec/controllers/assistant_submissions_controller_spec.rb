@@ -38,11 +38,11 @@ RSpec.describe AssistantSubmissionsController do
     it "returns error message when approval fails" do
       mock_service = instance_double(AssistantSubmissionServices::AcceptorService)
       allow(AssistantSubmissionServices::AcceptorService).to receive(:instance).and_return(mock_service)
-      allow(mock_service).to receive(:accept).and_raise(StandardError.new("Erro ao aprovar"))
+      allow(mock_service).to receive(:accept).and_raise(StandardError.new(I18n.t("assistant_submissions.error")))
 
       post :approve, params: { id: pending_submission.id }
       expect(response).to redirect_to(assistant_submissions_path)
-      expect(flash[:error]).to eq("Erro ao aprovar a submissão")
+      expect(flash[:error]).to eq(I18n.t("assistant_submissions.error"))
     end
   end
 
@@ -59,7 +59,7 @@ RSpec.describe AssistantSubmissionsController do
 
       post :reject, params: { id: submission.id, format: :json }
       expect(response).to have_http_status(:unprocessable_entity)
-      expect(response.parsed_body["error"]).to eq("Error rejecting the submission")
+      expect(response.parsed_body["error"]).to eq(I18n.t("assistant_submissions.rejected"))
     end
   end
 end

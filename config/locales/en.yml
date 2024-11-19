@@ -29,3 +29,12 @@
 
 en:
   hello: "Hello world"
+  login: "Login"
+  nav:
+    assistant_submissions: "Assistant Submissions"
+    logout: "Logout"
+  assistant_submissions:
+    approved: "Submission approved successfully"
+    error: "Error approving the submission"
+    rejected: "Submission rejected successfully"
+  

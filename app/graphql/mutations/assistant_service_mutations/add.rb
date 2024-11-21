@@ -7,12 +7,13 @@ module Mutations
 
       field :message, String, null: false
 
+      argument :description, String, required: false
       argument :modality, String, required: true
       argument :price, Integer, required: true
       argument :service_category_id, ID, required: true
       argument :service_id, ID, required: true
 
-      def resolve(modality:, price:, service_id:, service_category_id:)
+      def resolve(modality:, price:, service_id:, service_category_id:, description: nil)
         authenticate_user!
 
         AssistantServiceServices::CreateService.instance.create(
@@ -20,6 +21,7 @@ module Mutations
           price: price,
           service_id: service_id,
           service_category_id: service_category_id,
+          description: description,
           context: context
         )
         { message: "SUCCESS" }

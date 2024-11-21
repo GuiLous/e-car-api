@@ -25,7 +25,8 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
           modality: 'live',
           price: 100,
           serviceId: service.id,
-          serviceCategoryId: service_category.id
+          serviceCategoryId: service_category.id,
+          description: 'description'
         }
 
         context = { current_user: user }

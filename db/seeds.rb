@@ -16,7 +16,7 @@ end
 categories = ['LOL', 'CS', 'Valorant']
 
 categories.each do |category|
-  Fabricate(:service_category, name: category, type_category: 0)
+  Fabricate(:service_category, name: category, type_category: 0, image_url: 'https://arenaesports.com.br/foto/976x430/cache/wp-content/uploads/2020/05/abrir-todos-os-agentes-no-valorant.jpg')
 end
 
 30.times do

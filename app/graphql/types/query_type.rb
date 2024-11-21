@@ -15,7 +15,7 @@ module Types
     end
 
     def assistant_services
-      AssistantService.includes(:assistant, :service).all
+      AssistantService.where(status: "active").includes(:assistant, :service).all
     end
 
     def services

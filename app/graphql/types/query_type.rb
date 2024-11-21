@@ -4,7 +4,10 @@ module Types
   class QueryType < Types::BaseObject
     include ::Authenticatable
 
-    field :assistant_services, [ Types::AssistantServiceType ], null: false
+    field :assistant_services, [ Types::AssistantServiceType ], null: false do
+      argument :filters, Types::AssistantServiceFiltersType, required: false
+    end
+
     field :assistants, [ Types::AssistantType ], null: false
     field :me, Types::UserType, null: true
     field :service_categories, [ Types::ServiceCategoryType ], null: false
@@ -14,8 +17,12 @@ module Types
       Assistant.all
     end
 
-    def assistant_services
-      AssistantService.where(status: "active").includes(:assistant, :service).all
+    def assistant_services(filters: nil)
+      query = AssistantService.where(status: "active").includes(:assistant, :service)
+
+      query = query.where(assistant_id: filters.assistant_id) if filters && filters.assistant_id.present?
+
+      query.all
     end
 
     def services

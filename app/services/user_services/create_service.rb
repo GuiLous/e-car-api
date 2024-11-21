@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module UserServices
-  class CreatorService
+  class CreateService
     include Singleton
 
     def create(params)

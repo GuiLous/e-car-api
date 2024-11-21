@@ -41,7 +41,7 @@ RSpec.describe Mutations::AssistantMutations::SubmitAssistant do
         it 'returns a system error' do
           user = Fabricate :user
 
-          allow(AssistantSubmissionServices::CreatorService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
+          allow(AssistantSubmissionServices::CreateService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
 
           variables = {
             description: 'xpto',

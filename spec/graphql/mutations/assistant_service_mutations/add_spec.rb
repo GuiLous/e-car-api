@@ -65,7 +65,7 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
         it 'returns a system error' do
           user = Fabricate :user
 
-          allow(AssistantServiceServices::CreatorService.instance).to receive(:creator).and_raise(StandardError, 'SYSTEM_ERROR')
+          allow(AssistantServiceServices::CreateService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
 
           variables = {
             modality: 'live',

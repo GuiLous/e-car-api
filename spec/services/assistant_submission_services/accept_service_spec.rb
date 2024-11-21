@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AssistantSubmissionServices::AcceptorService do
+RSpec.describe AssistantSubmissionServices::AcceptService do
   describe '#accept' do
     it 'create assistant and assistant service' do
       user = Fabricate(:user)

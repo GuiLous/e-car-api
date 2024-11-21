@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AssistantSubmissionServices
-class CreatorService
+class CreateService
   include Singleton
 
   def create(user:, description:, modality:, price:, service_id:, service_category_id:)

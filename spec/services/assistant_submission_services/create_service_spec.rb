@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe AssistantSubmissionServices::CreatorService do
+RSpec.describe AssistantSubmissionServices::CreateService do
   describe '#create' do
     context 'when user have pending submission' do
       it 'raise error' do

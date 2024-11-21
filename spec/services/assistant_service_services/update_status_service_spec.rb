@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe AssistantServiceServices::UpdaterStatusService do
-  describe '#updater_status' do
+RSpec.describe AssistantServiceServices::UpdateStatusService do
+  describe '#update_status' do
     it 'updates the status of an assistant service to inactive' do
       assistant_service = Fabricate :assistant_service
 
-      described_class.instance.updater_status(
+      described_class.instance.update_status(
         assistant_service_id: assistant_service.id,
         status: 'inactive'
       )
@@ -18,7 +18,7 @@ RSpec.describe AssistantServiceServices::UpdaterStatusService do
     it 'updates the status of an assistant service to active' do
       assistant_service = Fabricate :assistant_service, status: 'inactive'
 
-      described_class.instance.updater_status(
+      described_class.instance.update_status(
         assistant_service_id: assistant_service.id,
         status: 'active'
       )

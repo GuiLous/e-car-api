@@ -2,7 +2,7 @@
 
 require "rails_helper"
 
-RSpec.describe UserServices::CreatorService do
+RSpec.describe UserServices::CreateService do
   describe '#create' do
     context 'when some errors ocurrs' do
       it 'raises error' do

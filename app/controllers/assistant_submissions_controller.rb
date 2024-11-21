@@ -8,7 +8,7 @@ class AssistantSubmissionsController < ApplicationController
   end
 
   def approve
-    AssistantSubmissionServices::AcceptorService.instance.accept(
+    AssistantSubmissionServices::AcceptService.instance.accept(
       assistant_submission_id: params[:id]
     )
     redirect_to assistant_submissions_path, notice: t("assistant_submissions.approved")

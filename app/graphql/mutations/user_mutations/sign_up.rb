@@ -12,7 +12,7 @@ module Mutations
       field :token, String, null: true
 
       def resolve(email:, password:, password_confirmation:, role:, name:)
-        UserServices::CreatorService.instance.create(
+        UserServices::CreateService.instance.create(
           email: email,
           password: password,
           name: name,

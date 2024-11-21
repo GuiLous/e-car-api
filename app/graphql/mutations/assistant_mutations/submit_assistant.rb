@@ -16,7 +16,7 @@ module Mutations
       def resolve(description:, modality:, price:, service_id:, service_category_id:)
         authenticate_user!
 
-        AssistantSubmissionServices::CreatorService.instance.create(
+        AssistantSubmissionServices::CreateService.instance.create(
           user: context[:current_user],
           description: description,
           modality: modality,

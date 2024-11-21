@@ -36,8 +36,8 @@ RSpec.describe AssistantSubmissionsController do
     end
 
     it "returns error message when approval fails" do
-      mock_service = instance_double(AssistantSubmissionServices::AcceptorService)
-      allow(AssistantSubmissionServices::AcceptorService).to receive(:instance).and_return(mock_service)
+      mock_service = instance_double(AssistantSubmissionServices::AcceptService)
+      allow(AssistantSubmissionServices::AcceptService).to receive(:instance).and_return(mock_service)
       allow(mock_service).to receive(:accept).and_raise(StandardError.new(I18n.t("assistant_submissions.error")))
 
       post :approve, params: { id: pending_submission.id }

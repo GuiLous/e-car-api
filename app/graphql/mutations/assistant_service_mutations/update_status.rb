@@ -13,7 +13,7 @@ module Mutations
       def resolve(assistant_service_id:, status:)
         authenticate_user!
 
-        AssistantServiceServices::UpdaterStatusService.instance.updater_status(
+        AssistantServiceServices::UpdateStatusService.instance.update_status(
           assistant_service_id: assistant_service_id,
           status: status
         )

@@ -2,8 +2,8 @@
 
 require 'rails_helper'
 
-RSpec.describe AssistantServiceServices::CreatorService do
-  describe '#creator' do
+RSpec.describe AssistantServiceServices::CreateService do
+  describe '#create' do
     context 'when no error occurs' do
       it 'creates an assistant service' do
         service = Fabricate :service
@@ -11,7 +11,7 @@ RSpec.describe AssistantServiceServices::CreatorService do
         assistant = Fabricate :assistant
         user = assistant.user
 
-        described_class.instance.creator(
+        described_class.instance.create(
           modality: 'live',
           price: 100,
           service_id: service.id,
@@ -31,7 +31,7 @@ RSpec.describe AssistantServiceServices::CreatorService do
           assistant = Fabricate :assistant
           user = assistant.user
 
-          described_class.instance.creator(
+          described_class.instance.create(
             modality: 'live',
             price: 100,
             service_id: service.id,
@@ -40,7 +40,7 @@ RSpec.describe AssistantServiceServices::CreatorService do
           )
 
           expect do
-            described_class.instance.creator(
+            described_class.instance.create(
               modality: 'live',
               price: 100,
               service_id: service.id,

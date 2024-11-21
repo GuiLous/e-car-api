@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AssistantSubmissionServices
-  class AcceptorService
+  class AcceptService
     include Singleton
 
     def accept(assistant_submission_id:)

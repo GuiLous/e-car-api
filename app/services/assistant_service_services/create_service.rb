@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module AssistantServiceServices
-  class CreatorService
+  class CreateService
     include Singleton
 
-    def creator(modality:, price:, service_id:, service_category_id:, context:)
+    def create(modality:, price:, service_id:, service_category_id:, context:)
       current_user = context[:current_user]
 
       assistant_service_already_exists = current_user.assistant.assistant_services.find_by(

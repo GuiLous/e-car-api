@@ -37,7 +37,7 @@ RSpec.describe Mutations::AssistantServiceMutations::UpdateStatus do
         it 'returns a system error' do
           assistant_service = Fabricate :assistant_service
 
-          allow(AssistantServiceServices::UpdaterStatusService.instance).to receive(:updater_status).and_raise(StandardError, 'SYSTEM_ERROR')
+          allow(AssistantServiceServices::UpdateStatusService.instance).to receive(:update_status).and_raise(StandardError, 'SYSTEM_ERROR')
 
           variables = {
             assistantServiceId: assistant_service.id,

@@ -13,7 +13,7 @@ module Types
     field :wallet, Types::WalletType, null: false
 
     def assistant_submission
-      AssistantSubmission.last
+      object.assistant_submissions.last
     end
 
     def assistant_services

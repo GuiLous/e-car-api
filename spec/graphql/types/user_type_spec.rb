@@ -37,7 +37,7 @@ RSpec.describe Types::UserType do
     it 'returns the expected fields for a user' do
       assistant = Fabricate :assistant
       user = assistant.user
-      submission = Fabricate :assistant_submission, description: 'xpto'
+      submission = Fabricate :assistant_submission, description: 'xpto', user: user
       service = Fabricate :service
 
       Fabricate :assistant_service, assistant: assistant, service: service

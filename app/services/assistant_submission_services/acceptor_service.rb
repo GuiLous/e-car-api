@@ -10,8 +10,13 @@ module AssistantSubmissionServices
 
       Assistant.create!(user: submission.user, description: submission.description).tap do |assistant|
         if assistant.persisted?
-          AssistantService.create!(assistant: assistant, service_id: submission.service_id, modality: submission.modality, price: submission.price,
-                                   service_category_id: submission.service_category_id)
+          AssistantService.create!(
+            assistant: assistant,
+            service_id: submission.service_id,
+            modality: submission.modality,
+            price: submission.price,
+            service_category_id: submission.service_category_id
+          )
         end
       end
     end

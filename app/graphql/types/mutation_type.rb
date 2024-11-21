@@ -14,5 +14,8 @@ module Types
 
     # Assistant
     field :submit_assistant, mutation: Mutations::AssistantMutations::SubmitAssistant
+
+    # Assistant Service
+    field :add_assistant_service, mutation: Mutations::AssistantServiceMutations::Add
   end
 end

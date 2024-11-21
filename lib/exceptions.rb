@@ -32,4 +32,8 @@ module Exceptions
   class UserHasPendingSubmissionError < BaseError
     MESSAGE = "USER_HAS_PENDING_SUBMISSION"
   end
+
+  class AssistantServiceAlreadyExistsError < BaseError
+    MESSAGE = "ASSISTANT_SERVICE_ALREADY_EXISTS"
+  end
 end

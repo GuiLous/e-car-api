@@ -7,7 +7,7 @@ module Mutations
 
       field :message, String, null: false
 
-      argument :description, String, required: false
+      argument :description, String, required: true
       argument :modality, String, required: true
       argument :price, Integer, required: true
       argument :service_category_id, ID, required: true

@@ -17,7 +17,7 @@ module Types
     end
 
     def assistant_services
-      object.assistant.assistant_services
+      object.assistant.assistant_services if object.assistant.present?
     end
   end
 end

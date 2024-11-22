@@ -6,8 +6,8 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!) {
-          addAssistantService(modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
+        mutation($modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!, $description: String!) {
+          addAssistantService(modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId, description: $description) {
             message
           }
         }
@@ -50,7 +50,8 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
             modality: 'live',
             price: 100,
             serviceId: service.id,
-            serviceCategoryId: service_category.id
+            serviceCategoryId: service_category.id,
+            description: 'description'
           }
 
           context = { current_user: user }
@@ -72,7 +73,8 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
             modality: 'live',
             price: 100,
             serviceId: 9999,
-            serviceCategoryId: 9999
+            serviceCategoryId: 9999,
+            description: 'description'
           }
 
           context = { current_user: user }

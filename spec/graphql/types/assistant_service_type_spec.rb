@@ -10,6 +10,7 @@ RSpec.describe Types::AssistantServiceType do
           assistantServices {
             id
             price
+            visible
             service {
               id
             }
@@ -48,7 +49,7 @@ RSpec.describe Types::AssistantServiceType do
       end
     end
 
-    context 'when an assistant_id is provided' do
+    context 'when a assistant_id is provided' do
       context 'when the assistant service is visible' do
         it 'returns the expected fields for a user' do
           assistant_service = Fabricate :assistant_service
@@ -75,6 +76,16 @@ RSpec.describe Types::AssistantServiceType do
 
           expect(data.size).to eq(0)
         end
+      end
+    end
+
+    context 'when visible is true' do
+      it 'returns the expected fields for a user' do
+        Fabricate :assistant_service, visible: 'visible'
+        response = ProladdoreSchema.execute(query).as_json
+        data = response['data']['assistantServices'][0]
+
+        expect(data['visible']).to be(true)
       end
     end
   end

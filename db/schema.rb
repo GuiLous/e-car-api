@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_21_210445) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_22_153811) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,7 +34,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_21_210445) do
     t.bigint "assistant_id"
     t.integer "modality", default: 0, null: false
     t.bigint "service_category_id"
-    t.integer "status", default: 0, null: false
+    t.integer "visible", default: 0, null: false
     t.text "description"
     t.index ["assistant_id"], name: "index_assistant_services_on_assistant_id"
     t.index ["service_category_id"], name: "index_assistant_services_on_service_category_id"

@@ -22,7 +22,7 @@ RSpec.describe Types::AssistantServiceType do
     end
 
     context 'when no assistant_id is provided' do
-      context 'when the assistant service is active' do
+      context 'when the assistant service is visible' do
         it 'returns the expected fields for a user' do
           assistant_service = Fabricate :assistant_service
           service = assistant_service.service
@@ -37,9 +37,9 @@ RSpec.describe Types::AssistantServiceType do
         end
       end
 
-      context 'when the assistant service is inactive' do
+      context 'when the assistant service is hidden' do
         it 'returns an empty array' do
-          Fabricate :assistant_service, status: 'inactive'
+          Fabricate :assistant_service, visible: 'hidden'
           response = ProladdoreSchema.execute(query).as_json
           data = response['data']['assistantServices']
 
@@ -49,7 +49,7 @@ RSpec.describe Types::AssistantServiceType do
     end
 
     context 'when an assistant_id is provided' do
-      context 'when the assistant service is active' do
+      context 'when the assistant service is visible' do
         it 'returns the expected fields for a user' do
           assistant_service = Fabricate :assistant_service
           service = assistant_service.service
@@ -66,9 +66,9 @@ RSpec.describe Types::AssistantServiceType do
         end
       end
 
-      context 'when the assistant service is inactive' do
+      context 'when the assistant service is hidden' do
         it 'returns an empty array' do
-          assistant_service = Fabricate :assistant_service, status: 'inactive'
+          assistant_service = Fabricate :assistant_service, visible: 'hidden'
           filters = { assistant_id: assistant_service.assistant.id }
           response = ProladdoreSchema.execute(query, variables: { filters: filters }).as_json
           data = response['data']['assistantServices']

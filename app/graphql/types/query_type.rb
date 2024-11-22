@@ -18,7 +18,7 @@ module Types
     end
 
     def assistant_services(filters: nil)
-      query = AssistantService.where(status: "active").includes(:assistant, :service)
+      query = AssistantService.where(visible: true).includes(:assistant, :service)
 
       query = query.where(assistant_id: filters.assistant_id) if filters && filters.assistant_id.present?
 

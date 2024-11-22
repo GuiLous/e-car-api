@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module AssistantServiceServices
-  class UpdateStatusService
+  class UpdateVisibilityService
     include Singleton
 
-    def update_status(assistant_service_id:, status:)
+    def update_visibility(assistant_service_id:, visible:)
       assistant_service = AssistantService.find(assistant_service_id)
 
-      assistant_service.update!(status: status)
+      assistant_service.update!(visible: visible)
     end
   end
 end

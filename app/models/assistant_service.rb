@@ -8,7 +8,7 @@
 #  description         :text
 #  modality            :integer          default("live"), not null
 #  price               :integer          default(0), not null
-#  status              :integer          default("active"), not null
+#  visible             :integer          default("hidden"), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  assistant_id        :bigint
@@ -35,7 +35,7 @@ class AssistantService < ApplicationRecord
   has_many :hired_services, dependent: :destroy
 
   enum :modality, { live: 0, closed_package: 1 }
-  enum :status, { active: 0, inactive: 1 }
+  enum :visible, { hidden: 0, visible: 1 }
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
 

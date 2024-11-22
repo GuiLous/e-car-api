@@ -8,7 +8,7 @@
 #  description         :text
 #  modality            :integer          default("live"), not null
 #  price               :integer          default(0), not null
-#  status              :integer          default("active"), not null
+#  visible             :integer          default("hidden"), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  assistant_id        :bigint
@@ -31,5 +31,5 @@ Fabricator(:assistant_service) do
   price { 0 }
   service { Fabricate :service }
   assistant { Fabricate :assistant }
-  status { :active }
+  visible { :visible }
 end

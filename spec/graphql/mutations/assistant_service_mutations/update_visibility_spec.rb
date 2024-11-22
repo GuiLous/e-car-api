@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe Mutations::AssistantServiceMutations::UpdateStatus do
+RSpec.describe Mutations::AssistantServiceMutations::UpdateVisibility do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($assistantServiceId: ID!, $status: String!) {
-          updateStatus(assistantServiceId: $assistantServiceId, status: $status) {
+        mutation($assistantServiceId: ID!, $visible: String!) {
+          updateVisibility(assistantServiceId: $assistantServiceId, visible: $visible) {
             message
           }
         }
@@ -15,19 +15,19 @@ RSpec.describe Mutations::AssistantServiceMutations::UpdateStatus do
     end
 
     context 'when no error occurs' do
-      it 'updates the status of an assistant service' do
+      it 'updates visibility of an assistant service' do
         assistant_service = Fabricate :assistant_service
 
         variables = {
           assistantServiceId: assistant_service.id,
-          status: 'active'
+          visible: 'visible'
         }
 
         context = { current_user: assistant_service.assistant.user }
 
         response = ProladdoreSchema.execute(mutation, variables: variables, context: context).as_json
 
-        data = response['data']['updateStatus']['message']
+        data = response['data']['updateVisibility']['message']
         expect(data).to eq('SUCCESS')
       end
     end
@@ -37,11 +37,11 @@ RSpec.describe Mutations::AssistantServiceMutations::UpdateStatus do
         it 'returns a system error' do
           assistant_service = Fabricate :assistant_service
 
-          allow(AssistantServiceServices::UpdateStatusService.instance).to receive(:update_status).and_raise(StandardError, 'SYSTEM_ERROR')
+          allow(AssistantServiceServices::UpdateVisibilityService.instance).to receive(:update_visibility).and_raise(StandardError, 'SYSTEM_ERROR')
 
           variables = {
             assistantServiceId: assistant_service.id,
-            status: 'active'
+            visible: 'visible'
           }
 
           context = { current_user: assistant_service.assistant.user }

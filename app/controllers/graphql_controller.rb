@@ -59,7 +59,10 @@ class GraphqlController < ApplicationController
     )
 
     user = User.find_by(id: decoded_token.first["id"])
+
     user.update(online_at: Time.current) if user.present?
+
+    user
   rescue JWT::DecodeError
     nil
   end

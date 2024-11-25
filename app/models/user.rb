@@ -41,6 +41,12 @@ class User < ApplicationRecord
   validates :name, :email, presence: true
   validates :email, uniqueness: true
 
+  def online
+    return false if online_at.nil?
+
+    (Time.current - online_at) <= 3.minutes
+  end
+
   def generate_jwt
     JWT.encode(
       {
@@ -52,5 +58,9 @@ class User < ApplicationRecord
       },
       ENV.fetch("DEVISE_JWT_SECRET_KEY")
     )
+  end
+
+  def as_json(options = {})
+    super(options).merge(online: online)
   end
 end

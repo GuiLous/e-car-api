@@ -9,6 +9,7 @@ module Types
     field :email, String, null: false
     field :id, ID, null: false
     field :name, String, null: false
+    field :online, Boolean, null: false
     field :role, String, null: false
     field :wallet, Types::WalletType, null: false
 

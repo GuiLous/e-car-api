@@ -58,7 +58,8 @@ class GraphqlController < ApplicationController
       algorithm: "HS256"
     )
 
-    User.find_by(id: decoded_token.first["id"])
+    user = User.find_by(id: decoded_token.first["id"])
+    user.update(online_at: Time.current) if user.present?
   rescue JWT::DecodeError
     nil
   end

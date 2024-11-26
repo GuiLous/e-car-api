@@ -11,6 +11,11 @@ module Types
     field :assistants, [ Types::AssistantType ], null: false do
       argument :online, Boolean, required: false
     end
+
+    field :assistant, Types::AssistantType, null: false do
+      argument :id, ID, required: true
+    end
+
     field :me, Types::UserType, null: true
     field :service_categories, [ Types::ServiceCategoryType ], null: false
     field :services, [ Types::ServiceType ], null: false
@@ -21,6 +26,18 @@ module Types
       assistants = assistants.joins(:user).where(users: { online_at: 3.minutes.ago..Time.current }) if online.present?
 
       assistants
+    end
+
+    def assistant(id:)
+      assistant = Assistant.where(id: id).includes(:user).first
+
+      return nil unless assistant
+      
+      assistant_services = AssistantService.joins(:assistant, :service).where({ assistant: assistant, visible: :visible })
+
+      assistant.assistant_services = assistant_services
+      
+      assistant
     end
 
     def assistant_services(filters: nil)

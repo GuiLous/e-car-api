@@ -2,6 +2,7 @@
 
 module Types
   class AssistantType < Types::BaseObject
+    field :assistant_services, [ Types::AssistantServiceType ], null: true
     field :description, String, null: true
     field :hired_services, [ Types::HiredServiceType ], null: true
     field :id, ID, null: false

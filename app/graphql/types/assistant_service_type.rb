@@ -14,7 +14,7 @@ module Types
     end
 
     def image_url
-      ServiceCategory.find(object.service_category_id).image_url
+      object.service_category&.image_url
     end
   end
 end

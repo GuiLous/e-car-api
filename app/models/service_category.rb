@@ -12,7 +12,7 @@
 #  updated_at    :datetime         not null
 #
 class ServiceCategory < ApplicationRecord
-  belongs_to :assistant_service, optional: true
+  has_many :assistant_service, dependent: :nullify
 
   enum :type_category, { game: 0 }
 

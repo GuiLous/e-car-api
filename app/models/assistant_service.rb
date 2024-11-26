@@ -8,7 +8,7 @@
 #  description         :text
 #  modality            :integer          default("live"), not null
 #  price               :integer          default(0), not null
-#  visible             :integer          default("hidden"), not null
+#  visible             :integer          default("visible"), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  assistant_id        :bigint

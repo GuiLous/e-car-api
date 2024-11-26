@@ -62,6 +62,6 @@ class User < ApplicationRecord
   end
 
   def as_json(options = {})
-    super(options).merge(online: online)
+    super.merge(online: online)
   end
 end

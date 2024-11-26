@@ -11,6 +11,7 @@ RSpec.describe Types::AssistantServiceType do
             id
             price
             visible
+            imageUrl
             service {
               id
             }

@@ -3,20 +3,18 @@ user = Fabricate :user
 user.wallet.add_coins(1000)
 
 services = []
-services << Fabricate(:service, name: 'League of Legends')
-services << Fabricate(:service, name: 'Counter Strike')
-services << Fabricate(:service, name: 'Valorant')
+services << Fabricate(:service, name: 'Coach')
+services << Fabricate(:service, name: 'IGL')
+services << Fabricate(:service, name: 'IGL')
 
 assistant = Fabricate(:assistant)
 
-services.each do |service|
-  Fabricate(:assistant_service, price: rand(100..300), assistant: assistant, service: service)
-end
-
 categories = ['LOL', 'CS', 'Valorant']
 
-categories.each do |category|
-  Fabricate(:service_category, name: category, type_category: 0, image_url: 'https://arenaesports.com.br/foto/976x430/cache/wp-content/uploads/2020/05/abrir-todos-os-agentes-no-valorant.jpg')
+categories.each_with_index do |category, index|
+  service_category = Fabricate(:service_category, name: category, type_category: 0, image_url: 'https://arenaesports.com.br/foto/976x430/cache/wp-content/uploads/2020/05/abrir-todos-os-agentes-no-valorant.jpg')
+
+  Fabricate(:assistant_service, price: rand(100..300), assistant: assistant, service: services[index], service_category_id: service_category.id)
 end
 
 30.times do

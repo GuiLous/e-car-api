@@ -60,4 +60,28 @@ RSpec.describe User do
       expect(user.generate_jwt).to be_a(String)
     end
   end
+
+  describe '#online' do
+    context 'when user is online' do
+      it 'returns true' do
+        user = Fabricate(:user, online_at: Time.current)
+        expect(user.online).to be(true)
+      end
+    end
+    
+    context 'when user is not online' do
+      it 'returns false' do
+        user = Fabricate(:user, online_at: 3.minutes.ago)
+        expect(user.online).to be(false)
+      end
+    end
+  end
+
+  describe '#as_json' do
+    it 'returns user as json with field online' do
+      user = Fabricate(:user, online_at: Time.current)
+
+      expect(user.as_json).to include(online: true)
+    end
+  end
 end

@@ -14,6 +14,20 @@ RSpec.describe Types::QueryType do
       GQL
     end
 
+    def query_find_assistant(id)
+      <<~GQL
+        query {
+          assistant(id: #{id}) {
+            id
+            assistantServices {
+              id
+              imageUrl
+            }
+          }
+        }
+      GQL
+    end
+
     context 'when does not exists users with assistant role' do
       it 'returns a empty array' do
         Fabricate :user, role: :customer
@@ -30,6 +44,22 @@ RSpec.describe Types::QueryType do
         response = ProladdoreSchema.execute(query).as_json
         data = response['data']['assistants']
         expect(data.size).to eq(1)
+      end
+    end
+
+    context 'when send assistant id as parameter' do
+      it 'return an unique assistant' do
+        service_category = Fabricate :service_category
+        service = Fabricate :service
+        assistant = Fabricate :assistant
+        
+        assistant_service = Fabricate :assistant_service, assistant: assistant, service: service, service_category_id: service_category.id, visible: :hidden
+
+        response = ProladdoreSchema.execute(query_find_assistant(assistant.id)).as_json
+
+        data = response['data']['assistant']
+
+        expect(data).to have_key('id')
       end
     end
   end

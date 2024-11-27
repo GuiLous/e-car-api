@@ -32,11 +32,11 @@ module Types
       assistant = Assistant.where(id: id).includes(:user).first
 
       return nil unless assistant
-      
+
       assistant_services = AssistantService.joins(:assistant, :service).where({ assistant: assistant, visible: :visible })
 
       assistant.assistant_services = assistant_services
-      
+
       assistant
     end
 

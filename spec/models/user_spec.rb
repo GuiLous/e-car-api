@@ -68,7 +68,7 @@ RSpec.describe User do
         expect(user.online).to be(true)
       end
     end
-    
+
     context 'when user is not online' do
       it 'returns false' do
         user = Fabricate(:user, online_at: 3.minutes.ago)

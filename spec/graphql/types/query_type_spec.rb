@@ -52,8 +52,8 @@ RSpec.describe Types::QueryType do
         service_category = Fabricate :service_category
         service = Fabricate :service
         assistant = Fabricate :assistant
-        
-        assistant_service = Fabricate :assistant_service, assistant: assistant, service: service, service_category_id: service_category.id, visible: :hidden
+
+        Fabricate :assistant_service, assistant: assistant, service: service, service_category_id: service_category.id, visible: :hidden
 
         response = ProladdoreSchema.execute(query_find_assistant(assistant.id)).as_json
 

@@ -3,6 +3,7 @@
 module Types
   class AssistantServiceType < Types::BaseObject
     field :assistant, Types::AssistantType, null: false
+    field :description, String, null: true
     field :id, ID, null: false
     field :image_url, String, null: true
     field :price, Integer, null: false

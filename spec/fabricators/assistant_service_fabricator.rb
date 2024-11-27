@@ -32,4 +32,5 @@ Fabricator(:assistant_service) do
   service { Fabricate :service }
   assistant { Fabricate :assistant }
   visible { :visible }
+  description { Faker::Lorem.paragraph(sentence_count: 2) }
 end

@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+module Types
+  module Inputs
+    class AssistantServiceInputType < GraphQL::Schema::InputObject
+      argument :description, String, required: true
+      argument :modality, String, required: true
+      argument :price, Integer, required: true
+      argument :service_category_id, ID, required: true
+      argument :service_id, ID, required: true
+    end
+  end
+end

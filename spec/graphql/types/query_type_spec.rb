@@ -143,4 +143,61 @@ RSpec.describe Types::QueryType do
       expect(data.size).to eq(1)
     end
   end
+
+  describe 'AssistantService' do
+    def query_find_assistant_service(id)
+      <<~GQL
+        query {
+          assistantService(id: #{id}) {
+            id
+            description
+            price
+            visible
+            assistant {
+              id
+            }
+            service {
+              id
+            }
+            serviceCategory {
+              id
+            }
+          }
+        }
+      GQL
+    end
+
+    context 'when exists assistant service' do
+      it 'returns an assistant service' do
+        assistant_service = Fabricate :assistant_service, visible: :visible
+
+        expected = {
+          'data' => {
+            'assistantService' => {
+              'id' => assistant_service.id.to_s,
+              'description' => assistant_service.description,
+              'price' => assistant_service.price,
+              'visible' => true,
+              'assistant' => { 'id' => assistant_service.assistant_id.to_s },
+              'service' => { 'id' => assistant_service.service_id.to_s },
+              'serviceCategory' => { 'id' => assistant_service.service_category_id.to_s }
+            }
+          }
+        }
+
+        expect_query_result(query_find_assistant_service(assistant_service.id)).to eq(expected)
+      end
+    end
+
+    context 'when does not exists assistant service' do
+      it 'returns nil' do
+        response = ProladdoreSchema.execute(query_find_assistant_service(1)).as_json
+        expect(response['data']['assistantService']).to be_nil
+      end
+    end
+  end
+
+  def expect_query_result(query, variables: {}, context: {})
+    expect(ProladdoreSchema.execute(query, variables: variables, context: context).to_h)
+  end
 end

@@ -8,6 +8,10 @@ module Types
       argument :filters, Types::AssistantServiceFiltersType, required: false
     end
 
+    field :assistant_service, Types::AssistantServiceType, null: true do
+      argument :id, ID, required: true
+    end
+
     field :assistants, [ Types::AssistantType ], null: false do
       argument :online, Boolean, required: false
     end
@@ -62,6 +66,10 @@ module Types
 
     def me
       context[:current_user]
+    end
+
+    def assistant_service(id:)
+      AssistantService.joins(:assistant, :service, :service_category).find_by(id: id)
     end
   end
 end

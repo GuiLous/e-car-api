@@ -8,7 +8,6 @@ module Types
     field :image_url, String, null: true
     field :modality, Enums::ModalityEnum, null: false
     field :price, Integer, null: false
-    field :service, Types::ServiceType, null: false
     field :service_category, Types::ServiceCategoryType, null: false
     field :visible, Boolean, null: false
 

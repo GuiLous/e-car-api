@@ -156,9 +156,6 @@ RSpec.describe Types::QueryType do
             assistant {
               id
             }
-            service {
-              id
-            }
             serviceCategory {
               id
             }
@@ -179,7 +176,6 @@ RSpec.describe Types::QueryType do
               'price' => assistant_service.price,
               'visible' => true,
               'assistant' => { 'id' => assistant_service.assistant_id.to_s },
-              'service' => { 'id' => assistant_service.service_id.to_s },
               'serviceCategory' => { 'id' => assistant_service.service_category_id.to_s }
             }
           }

@@ -29,7 +29,7 @@
 #
 class AssistantService < ApplicationRecord
   belongs_to :assistant
-  belongs_to :service
+  belongs_to :service, optional: true
   belongs_to :service_category, optional: true
 
   has_many :hired_services, dependent: :destroy

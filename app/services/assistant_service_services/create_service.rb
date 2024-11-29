@@ -4,12 +4,11 @@ module AssistantServiceServices
   class CreateService
     include Singleton
 
-    def create(modality:, price:, service_id:, service_category_id:, context:, description: nil)
+    def create(modality:, price:, service_category_id:, context:, description: nil)
       current_user = context[:current_user]
 
       if current_user.assistant.present?
         assistant_service_already_exists = current_user.assistant.assistant_services.find_by(
-          service_id: service_id,
           service_category_id: service_category_id,
           price: price,
           modality: modality
@@ -21,7 +20,6 @@ module AssistantServiceServices
       AssistantService.create!(
         modality: modality,
         price: price,
-        service_id: service_id,
         service_category_id: service_category_id,
         description: description,
         assistant: current_user.assistant

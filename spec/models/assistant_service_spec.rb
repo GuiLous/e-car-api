@@ -15,12 +15,6 @@ RSpec.describe AssistantService do
       expect(assistant_service.errors[:assistant]).to include('must exist')
     end
 
-    it 'is invalid without a service' do
-      assistant_service = Fabricate.build(:assistant_service, service: nil)
-      expect(assistant_service).not_to be_valid
-      expect(assistant_service.errors[:service]).to include('must exist')
-    end
-
     it 'has a default price of 0' do
       assistant_service = Fabricate(:assistant_service)
       expect(assistant_service.price).to eq(0)

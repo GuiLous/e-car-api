@@ -6,8 +6,8 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!, $description: String!) {
-          addAssistantService(modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId, description: $description) {
+        mutation($modality: String!, $price: Int!, $serviceCategoryId: ID!, $description: String!) {
+          addAssistantService(modality: $modality, price: $price, serviceCategoryId: $serviceCategoryId, description: $description) {
             message
           }
         }
@@ -16,7 +16,6 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
 
     context 'when no error occurs' do
       it 'add assistant service' do
-        service = Fabricate :service
         service_category = Fabricate :service_category
         assistant = Fabricate :assistant
         user = assistant.user
@@ -24,7 +23,6 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
         variables = {
           modality: 'live',
           price: 100,
-          serviceId: service.id,
           serviceCategoryId: service_category.id,
           description: 'description'
         }
@@ -41,7 +39,6 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
     context 'when an error occurs' do
       context 'when a AssistantServiceAlreadyExistsError is raised' do
         it 'returns an AssistantServiceAlreadyExistsError error' do
-          service = Fabricate :service
           service_category = Fabricate :service_category
           assistant = Fabricate :assistant
           user = assistant.user
@@ -49,7 +46,6 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
           variables = {
             modality: 'live',
             price: 100,
-            serviceId: service.id,
             serviceCategoryId: service_category.id,
             description: 'description'
           }
@@ -72,7 +68,6 @@ RSpec.describe Mutations::AssistantServiceMutations::Add do
           variables = {
             modality: 'live',
             price: 100,
-            serviceId: 9999,
             serviceCategoryId: 9999,
             description: 'description'
           }

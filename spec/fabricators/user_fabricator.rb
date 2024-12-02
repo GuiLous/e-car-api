@@ -26,6 +26,7 @@ Fabricator(:user) do
   password { 'Taller@123' }
   name { Faker::Name.name }
   role { 0 }
+  online_at { Time.current }
 
   after_create do |user|
     Fabricate(:wallet, user: user)

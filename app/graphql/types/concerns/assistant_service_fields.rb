@@ -32,7 +32,7 @@ module Types
         query = filter_by_assistant(query, filters)
         query = filter_by_modality(query, filters)
         query = filter_by_service_category(query, filters)
-        query = apply_online_filter(query, filters.online) if filters.online.present?
+        query = apply_online_filter(query, filters.online) unless filters.online.nil?
 
         query.all
       end
@@ -56,9 +56,9 @@ module Types
       end
 
       def apply_online_filter(query, online)
-        return query.where(assistant: { user: { online_at: [ nil, ..3.minutes.ago ] } }) unless online
+        return query.joins(assistant: { user: {} }).where(users: { online_at: [ nil, ..3.minutes.ago ] }) unless online
 
-        query.where(assistant: { user: { online_at: 3.minutes.ago..Time.current } })
+        query.joins(assistant: { user: {} }).where(users: { online_at: 3.minutes.ago..Time.current })
       end
     end
   end

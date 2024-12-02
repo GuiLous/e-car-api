@@ -10,16 +10,15 @@ RSpec.describe AssistantSubmissionServices::CreateService do
 
         user.assistant_submissions.create(description: 'xpto', status: :pending)
 
-        service = Fabricate(:service)
         service_category = Fabricate(:service_category)
 
         expect do
           described_class.instance.create(
             user: user,
+            title: 'I am an assistant',
             description: 'xpto',
             modality: 'live',
             price: 100,
-            service_id: service.id,
             service_category_id: service_category.id
           )
         end.to raise_error(Exceptions::UserHasPendingSubmissionError)
@@ -33,16 +32,15 @@ RSpec.describe AssistantSubmissionServices::CreateService do
 
           user = assistant.user
 
-          service = Fabricate(:service)
           service_category = Fabricate(:service_category)
 
           expect do
             described_class.instance.create(
               user: user,
+              title: 'I am an assistant',
               description: 'xpto',
               modality: 'live',
               price: 100,
-              service_id: service.id,
               service_category_id: service_category.id
             )
           end.to raise_error(Exceptions::UserIsAlreadyAnAssistantError)
@@ -52,15 +50,14 @@ RSpec.describe AssistantSubmissionServices::CreateService do
       context "when user is not an assistant" do
         it 'create assistant model' do
           user = Fabricate(:user)
-          service = Fabricate(:service)
           service_category = Fabricate(:service_category)
 
           described_class.instance.create(
             user: user,
+            title: 'I am an assistant',
             description: 'xpto',
             modality: 'live',
             price: 100,
-            service_id: service.id,
             service_category_id: service_category.id
           )
 

@@ -11,9 +11,9 @@ module Mutations
       argument :modality, String, required: true
       argument :price, Integer, required: true
       argument :service_category_id, ID, required: true
-      argument :service_id, ID, required: true
+      argument :title, String, required: true
 
-      def resolve(description:, modality:, price:, service_id:, service_category_id:)
+      def resolve(description:, modality:, price:, service_category_id:, title:)
         authenticate_user!
 
         AssistantSubmissionServices::CreateService.instance.create(
@@ -21,8 +21,8 @@ module Mutations
           description: description,
           modality: modality,
           price: price,
-          service_id: service_id,
-          service_category_id: service_category_id
+          service_category_id: service_category_id,
+          title: title
         )
         { message: "SUCCESS" }
       rescue Exceptions::UserIsAlreadyAnAssistantError => e

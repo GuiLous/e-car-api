@@ -6,8 +6,8 @@ RSpec.describe Mutations::AssistantMutations::SubmitAssistant do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($description: String!, $modality: String!, $price: Int!, $serviceId: ID!, $serviceCategoryId: ID!) {
-          submitAssistant(description: $description, modality: $modality, price: $price, serviceId: $serviceId, serviceCategoryId: $serviceCategoryId) {
+        mutation($description: String!, $modality: String!, $price: Int!, $serviceCategoryId: ID!, $title: String!) {
+          submitAssistant(description: $description, modality: $modality, price: $price, serviceCategoryId: $serviceCategoryId, title: $title) {
             message
           }
         }
@@ -17,14 +17,13 @@ RSpec.describe Mutations::AssistantMutations::SubmitAssistant do
     context 'when no error occurs' do
       it 'change to assistant' do
         user = Fabricate :user, role: 1
-        service = Fabricate :service
         service_category = Fabricate :service_category
 
         variables = {
+          title: 'I am an assistant',
           description: 'xpto',
           modality: 'live',
           price: 100,
-          serviceId: service.id,
           serviceCategoryId: service_category.id
         }
 
@@ -44,10 +43,10 @@ RSpec.describe Mutations::AssistantMutations::SubmitAssistant do
           allow(AssistantSubmissionServices::CreateService.instance).to receive(:create).and_raise(StandardError, 'SYSTEM_ERROR')
 
           variables = {
+            title: 'I am an assistant',
             description: 'xpto',
             modality: 'live',
             price: 100,
-            serviceId: 9999,
             serviceCategoryId: 9999
           }
 
@@ -64,14 +63,13 @@ RSpec.describe Mutations::AssistantMutations::SubmitAssistant do
           assistant = Fabricate :assistant
           user = assistant.user
 
-          service = Fabricate :service
           service_category = Fabricate :service_category
 
           variables = {
+            title: 'I am an assistant',
             description: 'xpto',
             modality: 'live',
             price: 100,
-            serviceId: service.id,
             serviceCategoryId: service_category.id
           }
 

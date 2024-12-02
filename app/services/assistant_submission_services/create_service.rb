@@ -4,11 +4,11 @@ module AssistantSubmissionServices
 class CreateService
   include Singleton
 
-  def create(user:, description:, modality:, price:, service_id:, service_category_id:)
+  def create(user:, title:, description:, modality:, price:, service_category_id:)
     raise Exceptions::UserHasPendingSubmissionError if user.assistant_submissions.last&.pending?
     raise Exceptions::UserIsAlreadyAnAssistantError if user.assistant.present?
 
-    user.assistant_submissions.create(user: user, description: description, status: :pending, service_id: service_id, modality: modality, price: price, service_category_id: service_category_id)
+    user.assistant_submissions.create(user: user, title: title, description: description, status: :pending, service_category_id: service_category_id, modality: modality, price: price)
   end
 end
 end

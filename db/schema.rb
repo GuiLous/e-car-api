@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_29_192307) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_02_124924) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,7 +46,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_192307) do
     t.bigint "user_id", null: false
     t.text "description"
     t.integer "status", default: 0, null: false
-    t.bigint "service_id", null: false
     t.bigint "service_category_id", null: false
     t.integer "modality", default: 0, null: false
     t.integer "price", default: 0, null: false
@@ -54,7 +53,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_192307) do
     t.datetime "updated_at", null: false
     t.string "title", default: "", null: false
     t.index ["service_category_id"], name: "index_assistant_submissions_on_service_category_id"
-    t.index ["service_id"], name: "index_assistant_submissions_on_service_id"
     t.index ["user_id"], name: "index_assistant_submissions_on_user_id"
   end
 
@@ -127,7 +125,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_29_192307) do
   add_foreign_key "assistant_services", "service_categories"
   add_foreign_key "assistant_services", "services"
   add_foreign_key "assistant_submissions", "service_categories"
-  add_foreign_key "assistant_submissions", "services"
   add_foreign_key "assistant_submissions", "users"
   add_foreign_key "assistants", "users"
   add_foreign_key "hired_services", "assistant_services"

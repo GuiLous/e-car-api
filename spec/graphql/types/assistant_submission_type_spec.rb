@@ -13,9 +13,6 @@ RSpec.describe Types::AssistantSubmissionType do
               id
               modality
               price
-              service {
-                id
-              }
               serviceCategory {
                 id
               }
@@ -31,7 +28,7 @@ RSpec.describe Types::AssistantSubmissionType do
 
     it 'returns the expected fields for a assistant submission' do
       user = Fabricate :user
-      submission = Fabricate :assistant_submission, user: user, description: 'xpto', modality: 0, price: 100, status: :pending
+      submission = Fabricate :assistant_submission, user: user, title: 'I am an assistant', description: 'xpto', modality: 0, price: 100, status: :pending
 
       context = { current_user: user }
       response = ProladdoreSchema.execute(query, context: context).as_json

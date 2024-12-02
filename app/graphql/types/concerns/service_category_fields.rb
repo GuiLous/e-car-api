@@ -10,8 +10,6 @@ module Types
       end
 
       def service_categories
-        authenticate_user!
-
         ServiceCategory.all
       end
     end

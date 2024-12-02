@@ -17,14 +17,13 @@ RSpec.describe Mutations::AssistantServiceMutations::Update do
     context 'when no error occurs' do
       it 'updates an assistant service' do
         assistant_service = Fabricate :assistant_service, description: 'current description'
-        service = Fabricate :service
         service_category = Fabricate :service_category
 
         attributes = {
           modality: 'live',
           price: 100,
-          serviceId: service.id,
           serviceCategoryId: service_category.id,
+          title: 'new title',
           description: 'new description'
         }
 
@@ -44,7 +43,7 @@ RSpec.describe Mutations::AssistantServiceMutations::Update do
         expect(assistant_service).to have_attributes(
           modality: 'live',
           price: 100,
-          service_id: service.id,
+          title: 'new title',
           service_category_id: service_category.id,
           description: 'new description'
         )
@@ -55,7 +54,6 @@ RSpec.describe Mutations::AssistantServiceMutations::Update do
       context 'when a StandardError is raised' do
         it 'returns a system error' do
           assistant_service = Fabricate :assistant_service
-          service = Fabricate :service
           service_category = Fabricate :service_category
 
           allow(AssistantServiceServices::UpdateService.instance).to receive(:update).and_raise(StandardError, 'SYSTEM_ERROR')
@@ -63,9 +61,9 @@ RSpec.describe Mutations::AssistantServiceMutations::Update do
           attributes = {
             modality: 'live',
             price: 100,
-            serviceId: service.id,
             serviceCategoryId: service_category.id,
-            description: 'description'
+            description: 'description',
+            title: 'new title'
           }
 
           variables = {

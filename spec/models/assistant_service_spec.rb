@@ -26,10 +26,5 @@ RSpec.describe AssistantService do
       assistant_service = Fabricate.create(:assistant_service)
       expect(assistant_service.assistant).to be_present
     end
-
-    it 'belongs to a service' do
-      assistant_service = Fabricate.create(:assistant_service)
-      expect(assistant_service.service).to be_present
-    end
   end
 end

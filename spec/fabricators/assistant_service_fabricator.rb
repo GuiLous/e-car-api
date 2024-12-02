@@ -8,12 +8,13 @@
 #  description         :text
 #  modality            :integer          default("live"), not null
 #  price               :integer          default(0), not null
+#  title               :string           default(""), not null
 #  visible             :integer          default("visible"), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  assistant_id        :bigint
 #  service_category_id :bigint
-#  service_id          :bigint           not null
+#  service_id          :bigint
 #
 # Indexes
 #
@@ -29,9 +30,9 @@
 #
 Fabricator(:assistant_service) do
   price { 0 }
-  service { Fabricate :service }
   assistant { Fabricate :assistant }
   visible { :visible }
   description { Faker::Lorem.paragraph(sentence_count: 2) }
+  title { Faker::Lorem.word }
   service_category { Fabricate :service_category }
 end

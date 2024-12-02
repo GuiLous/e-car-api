@@ -50,10 +50,9 @@ RSpec.describe Types::QueryType do
     context 'when send assistant id as parameter' do
       it 'return an unique assistant' do
         service_category = Fabricate :service_category
-        service = Fabricate :service
         assistant = Fabricate :assistant
 
-        Fabricate :assistant_service, assistant: assistant, service: service, service_category_id: service_category.id, visible: :hidden
+        Fabricate :assistant_service, assistant: assistant, service_category_id: service_category.id, visible: :hidden
 
         response = ProladdoreSchema.execute(query_find_assistant(assistant.id)).as_json
 
@@ -150,6 +149,7 @@ RSpec.describe Types::QueryType do
         query {
           assistantService(id: #{id}) {
             id
+            title
             description
             price
             visible
@@ -172,6 +172,7 @@ RSpec.describe Types::QueryType do
           'data' => {
             'assistantService' => {
               'id' => assistant_service.id.to_s,
+              'title' => assistant_service.title,
               'description' => assistant_service.description,
               'price' => assistant_service.price,
               'visible' => true,

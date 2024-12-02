@@ -15,7 +15,6 @@ RSpec.describe AssistantSubmissionServices::AcceptService do
       expect(submission.reload).to be_approved
       expect(user.assistant).not_to be_nil
       expect(user.assistant.description).to eq('xpto')
-      expect(user.assistant.assistant_services.first.service_id).to eq(submission.service_id)
       expect(user.assistant.assistant_services.first.modality).to eq('live')
       expect(user.assistant.assistant_services.first.price).to eq(submission.price)
       expect(user.assistant.assistant_services.first.service_category_id).to eq(submission.service_category_id)

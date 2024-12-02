@@ -9,6 +9,7 @@
 #  modality            :integer          default(0), not null
 #  price               :integer          default(0), not null
 #  status              :integer          default("pending"), not null
+#  title               :string           default(""), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  service_category_id :bigint           not null
@@ -29,8 +30,10 @@
 #
 class AssistantSubmission < ApplicationRecord
   belongs_to :user
-  belongs_to :service
+  belongs_to :service, optional: true
   belongs_to :service_category
+
+  validates :title, presence: true
 
   enum :status, {
     pending: 0,

@@ -33,13 +33,13 @@ module Types
     end
 
     def assistant(id:)
-      assistant = Assistant.where(id: id).includes(:user).first
+      assistant = Assistant.includes(:user)
+                           .includes(assistant_services: :service)
+                           .find_by(id: id)
 
       return nil unless assistant
 
-      assistant_services = AssistantService.joins(:assistant, :service).where({ assistant: assistant, visible: :visible })
-
-      assistant.assistant_services = assistant_services
+      assistant.assistant_services = assistant.assistant_services.where(visible: true)
 
       assistant
     end
@@ -69,7 +69,7 @@ module Types
     end
 
     def assistant_service(id:)
-      AssistantService.joins(:assistant, :service, :service_category).find_by(id: id)
+      AssistantService.joins(:assistant, :service_category).find_by(id: id)
     end
   end
 end

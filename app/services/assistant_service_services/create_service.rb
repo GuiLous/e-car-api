@@ -4,7 +4,7 @@ module AssistantServiceServices
   class CreateService
     include Singleton
 
-    def create(modality:, price:, service_category_id:, context:, description: nil)
+    def create(title:, modality:, price:, service_category_id:, context:, description: nil)
       current_user = context[:current_user]
 
       if current_user.assistant.present?
@@ -21,6 +21,7 @@ module AssistantServiceServices
         modality: modality,
         price: price,
         service_category_id: service_category_id,
+        title: title,
         description: description,
         assistant: current_user.assistant
       )

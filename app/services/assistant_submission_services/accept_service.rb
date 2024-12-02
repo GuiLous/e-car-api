@@ -12,10 +12,10 @@ module AssistantSubmissionServices
         if assistant.persisted?
           AssistantService.create!(
             assistant: assistant,
-            service_id: submission.service_id,
             modality: submission.modality,
             price: submission.price,
-            service_category_id: submission.service_category_id
+            service_category_id: submission.service_category_id,
+            title: submission.title
           )
         end
       end

@@ -11,11 +11,13 @@ module Mutations
       argument :modality, String, required: true
       argument :price, Integer, required: true
       argument :service_category_id, ID, required: true
+      argument :title, String, required: true
 
-      def resolve(modality:, price:, service_category_id:, description: nil)
+      def resolve(title:, modality:, price:, service_category_id:, description: nil)
         authenticate_user!
 
         AssistantServiceServices::CreateService.instance.create(
+          title: title,
           modality: modality,
           price: price,
           service_category_id: service_category_id,

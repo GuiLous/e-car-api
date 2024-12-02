@@ -9,6 +9,7 @@ module Types
     field :modality, Enums::ModalityEnum, null: false
     field :price, Integer, null: false
     field :service_category, Types::ServiceCategoryType, null: false
+    field :title, String, null: false
     field :visible, Boolean, null: false
 
     def visible

@@ -8,12 +8,13 @@
 #  description         :text
 #  modality            :integer          default("live"), not null
 #  price               :integer          default(0), not null
+#  title               :string           default(""), not null
 #  visible             :integer          default("visible"), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  assistant_id        :bigint
 #  service_category_id :bigint
-#  service_id          :bigint           not null
+#  service_id          :bigint
 #
 # Indexes
 #
@@ -38,6 +39,7 @@ class AssistantService < ApplicationRecord
   enum :visible, { hidden: 0, visible: 1 }
 
   validates :price, numericality: { greater_than_or_equal_to: 0 }
+  validates :title, presence: true
 
   def hire(date:, user:)
     raise Exceptions::SameUserError if assistant.user_id == user.id

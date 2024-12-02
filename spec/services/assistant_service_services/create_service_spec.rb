@@ -14,7 +14,8 @@ RSpec.describe AssistantServiceServices::CreateService do
           modality: 'live',
           price: 100,
           service_category_id: service_category.id,
-          context: { current_user: user }
+          context: { current_user: user },
+          title: 'teste'
         )
 
         expect(AssistantService.count).to eq(1)
@@ -33,7 +34,8 @@ RSpec.describe AssistantServiceServices::CreateService do
             modality: 'live',
             price: 100,
             service_category_id: service_category.id,
-            context: { current_user: user }
+            context: { current_user: user },
+            title: 'teste'
           )
 
           expect do
@@ -41,7 +43,8 @@ RSpec.describe AssistantServiceServices::CreateService do
               modality: 'live',
               price: 100,
               service_category_id: service_category.id,
-              context: { current_user: user }
+              context: { current_user: user },
+              title: 'teste'
             )
           end.to raise_error(Exceptions::AssistantServiceAlreadyExistsError)
         end

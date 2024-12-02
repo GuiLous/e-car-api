@@ -7,7 +7,7 @@ module Types
       argument :modality, String, required: true
       argument :price, Integer, required: true
       argument :service_category_id, ID, required: true
-      argument :service_id, ID, required: true
+      argument :title, String, required: true
     end
   end
 end

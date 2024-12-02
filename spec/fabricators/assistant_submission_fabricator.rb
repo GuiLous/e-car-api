@@ -9,6 +9,7 @@
 #  modality            :integer          default(0), not null
 #  price               :integer          default(0), not null
 #  status              :integer          default("pending"), not null
+#  title               :string           default(""), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  service_category_id :bigint           not null
@@ -31,5 +32,9 @@ Fabricator(:assistant_submission) do
   user { Fabricate(:user) }
   status { AssistantSubmission.statuses.keys.sample }
   service { Fabricate(:service) }
+  title { Faker::Lorem.word }
+  description { Faker::Lorem.paragraph }
+  modality { AssistantService.modalities.keys.sample }
+  price { Faker::Number.between(from: 120, to: 1000) }
   service_category { Fabricate(:service_category) }
 end

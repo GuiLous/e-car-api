@@ -17,8 +17,49 @@ module Types
 
       def assistant_services(filters: nil)
         query = AssistantService.where(visible: true).includes(:assistant, :service)
+        apply_filters(query, filters)
       end
 
       def assistant_service(id:)
         AssistantService.joins(:assistant, :service_category).find_by(id: id)
+      end
+
+      private
+
+      def apply_filters(query, filters)
+        return query.all unless filters
+
+        query = filter_by_assistant(query, filters)
+        query = filter_by_modality(query, filters)
+        query = filter_by_service_category(query, filters)
+        query = apply_online_filter(query, filters.online) if filters.online.present?
+
+        query.all
+      end
+
+      def filter_by_assistant(query, filters)
+        return query if filters.assistant_id.blank?
+
+        query.where(assistant_id: filters.assistant_id)
+      end
+
+      def filter_by_modality(query, filters)
+        return query if filters.modality.blank?
+
+        query.where(modality: filters.modality)
+      end
+
+      def filter_by_service_category(query, filters)
+        return query if filters.service_category_id.blank?
+
+        query.where(service_category_id: filters.service_category_id)
+      end
+
+      def apply_online_filter(query, online)
+        return query.where(assistant: { user: { online_at: [ nil, ..3.minutes.ago ] } }) unless online
+
+        query.where(assistant: { user: { online_at: 3.minutes.ago..Time.current } })
+      end
+    end
+  end
 end

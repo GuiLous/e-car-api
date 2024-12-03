@@ -29,6 +29,8 @@ class HiredService < ApplicationRecord
   belongs_to :assistant_service
   belongs_to :user
 
+  has_one :session_service, dependent: :destroy
+
   after_update :update_analysis_started_at, if: -> { saved_change_to_status? && analyzing? }
 
   scope :analysis_finished, lambda {

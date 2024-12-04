@@ -19,5 +19,8 @@ module Types
     field :add_assistant_service, mutation: Mutations::AssistantServiceMutations::Add
     field :update_assistant_service, mutation: Mutations::AssistantServiceMutations::Update
     field :update_visibility, mutation: Mutations::AssistantServiceMutations::UpdateVisibility
+
+    # Session Service
+    field :start_session_service, mutation: Mutations::SessionServiceMutations::StartSession
   end
 end

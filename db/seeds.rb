@@ -1,4 +1,9 @@
 Admin.create!(email: 'dev@taller.net.br', password: '123456', password_confirmation: '123456')
+
+Fabricate :user, email: 'assistant@taller.net.br', password: 'Taller@123', role: 1
+consumer = Fabricate :user, email: 'consumer@taller.net.br', password: 'Taller@123'
+consumer.waller.add_coins(10000)
+
 user = Fabricate :user
 user.wallet.add_coins(1000)
 

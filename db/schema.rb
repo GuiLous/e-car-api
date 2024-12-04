@@ -99,7 +99,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_03_182755) do
   end
 
   create_table "session_services", force: :cascade do |t|
-    t.bigint "hired_service_id", null: false, array: true
+    t.bigint "hired_service_id", null: false
     t.datetime "assistant_started_at"
     t.datetime "consumer_started_at"
     t.datetime "end_at"
@@ -140,5 +140,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_03_182755) do
   add_foreign_key "assistants", "users"
   add_foreign_key "hired_services", "assistant_services"
   add_foreign_key "hired_services", "users"
+  add_foreign_key "session_services", "hired_services"
   add_foreign_key "wallets", "users"
 end

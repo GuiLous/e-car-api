@@ -9,5 +9,6 @@ module Types
     include Types::Concerns::ServiceCategoryFields
     include Types::Concerns::AssistantFields
     include Types::Concerns::ServiceFields
+    include Types::Concerns::SessionServiceFields
   end
 end

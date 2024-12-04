@@ -21,7 +21,12 @@
 #
 #  fk_rails_cf15bea252  (hired_service_id => hired_services.id)
 #
-class SessionService < ApplicationRecord
-  enum :status, { created: 0, in_progress: 1, done: 2 }
-  belongs_to :hired_service
+Fabricator(:session_service) do
+  assistant_started_at { Time.current }
+  consumer_started_at { Time.current }
+  end_at { Time.current }
+  status { SessionService.statuses.keys.sample }
+  created_at { Time.current }
+  updated_at { Time.current }
+  hired_service { Fabricate :hired_service }
 end

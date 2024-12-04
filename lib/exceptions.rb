@@ -37,21 +37,22 @@ module Exceptions
     MESSAGE = "ASSISTANT_SERVICE_ALREADY_EXISTS"
   end
 
-  class SessionServiceAlreadyStarted< BaseError
+  class SessionServiceAlreadyStarted < BaseError
     MESSAGE = "ALREADY_START"
   end
 
-  class SessionServiceInProgress< BaseError
+  class SessionServiceInProgress < BaseError
     MESSAGE = "IN_PROGRESS"
   end
 
-  class SessionServiceNotFound< BaseError
+  class SessionServiceNotFound < BaseError
     MESSAGE = "NOT_FOUND"
   end
 
-  class HiredServiceItsNotLive< BaseError
+  class HiredServiceItsNotLive < BaseError
     MESSAGE = "SERVICE_NOT_LIVE"
   end
+
   class HiredServiceNotFound < BaseError
     MESSAGE = "HIRED_SERVICE_NOT_FOUND"
   end

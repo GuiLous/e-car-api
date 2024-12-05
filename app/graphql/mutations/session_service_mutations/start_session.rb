@@ -11,10 +11,7 @@ module Mutations
 
       def resolve(hired_service_id:)
         authenticate_user!
-        hired_service = HiredService.find(hired_service_id)
-        raise Exceptions::HiredServiceItsNotLive unless hired_service.assistant_service.live?
-
-        session_service = SessionServices::SessionStartService.instance.start(hired_service: hired_service, current_user: context[:current_user])
+        session_service = SessionServices::SessionStartService.instance.start(hired_service_id: hired_service_id, current_user: context[:current_user])
         { session: session_service }
       rescue StandardError => e
         Rails.logger.error e.message

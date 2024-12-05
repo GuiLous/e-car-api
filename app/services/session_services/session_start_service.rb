@@ -4,8 +4,11 @@ module SessionServices
   class SessionStartService
     include Singleton
 
-    def start(hired_service:, current_user:)
-      session_service = SessionService.where("? = ANY (hired_service_id)", hired_service.id).first
+    def start(hired_service_id:, current_user:)
+      hired_service = HiredService.find(hired_service_id)
+      raise Exceptions::HiredServiceItsNotLive unless hired_service.assistant_service.live?
+
+      session_service = hired_service.session_service
       session_service = assistant_start_session(hired_service.id, session_service) if current_user.assistant?
 
       raise Exceptions::SessionServiceNotFound if session_service.nil?

@@ -24,7 +24,7 @@ module SessionServices
     def assistant_start_session(session_service)
       return session_service if session_service.assistant_started_at.present?
 
-      session_service.update(assistant_started_at: DateTime.current, status: :in_progress, end_at: DateTime.current + 1.minutes)
+      session_service.update(assistant_started_at: DateTime.current, status: :in_progress, end_at: DateTime.current + 1.minute)
     end
 
     def consumer_start_session(hired_service, session_service)

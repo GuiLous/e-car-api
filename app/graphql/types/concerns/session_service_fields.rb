@@ -6,7 +6,7 @@ module Types
       extend ActiveSupport::Concern
 
       included do
-        field :sessions_service, [SessionServiceType], null: false
+        field :sessions_service, [ SessionServiceType ], null: false
 
         field :session_by_hired_service, SessionServiceType, null: false do
           argument :hired_service_id, Integer, required: false
@@ -27,13 +27,16 @@ module Types
         current_user = context[:current_user]
         session_service = SessionService.find(session_service_id)
 
-        if current_user.assistant?
-          return session_service if session_service.hired_service.user.id == current_user.id
-          raise "NOT_IN_SESSION" if session_service.hired_service.assistant_service.assistant.user.id != current_user.id
-        end
+        assistant_validation(session_service) if current_user.assistant?
 
         raise "NOT_IN_SESSION" if current_user.customer? && session_service.hired_service.user.id != current_user.id
+
         session_service
+      end
+
+      def assistant_validation(session_service)
+        return session_service if session_service.hired_service.user.id == current_user.id
+        raise "NOT_IN_SESSION" if session_service.hired_service.assistant_service.assistant.user.id != current_user.id
       end
 
       def session_by_hired_service(hired_service_id:)

@@ -27,14 +27,14 @@ module Types
         current_user = context[:current_user]
         session_service = SessionService.find(session_service_id)
 
-        assistant_validation(session_service) if current_user.assistant?
+        assistant_validation(session_service, current_user) if current_user.assistant?
 
         raise "NOT_IN_SESSION" if current_user.customer? && session_service.hired_service.user.id != current_user.id
 
         session_service
       end
 
-      def assistant_validation(session_service)
+      def assistant_validation(session_service, current_user)
         return session_service if session_service.hired_service.user.id == current_user.id
         raise "NOT_IN_SESSION" if session_service.hired_service.assistant_service.assistant.user.id != current_user.id
       end

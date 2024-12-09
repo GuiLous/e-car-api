@@ -22,11 +22,11 @@
 #  fk_rails_cf15bea252  (hired_service_id => hired_services.id)
 #
 Fabricator(:session_service) do
+  hired_service { Fabricate :hired_service }
   assistant_started_at { Time.current }
   consumer_started_at { Time.current }
   end_at { Time.current }
   status { SessionService.statuses.keys.sample }
   created_at { Time.current }
   updated_at { Time.current }
-  hired_service { Fabricate :hired_service }
 end

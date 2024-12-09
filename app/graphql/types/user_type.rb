@@ -7,6 +7,7 @@ module Types
     field :assistant_submission, Types::AssistantSubmissionType, null: true
     field :description, String, null: true
     field :email, String, null: false
+    field :hired_services, [ Types::HiredServiceType ], null: true
     field :id, ID, null: false
     field :name, String, null: false
     field :online, Boolean, null: false

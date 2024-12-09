@@ -30,7 +30,7 @@ class Wallet < ApplicationRecord
   end
 
   def blocked_coins
-    user.hired_services.scheduled.joins(:assistant_service).sum("assistant_services.price")
+    user.hired_services.where(status: %w[scheduled analyzing]).joins(:assistant_service).sum("assistant_services.price")
   end
 
   def available_coins

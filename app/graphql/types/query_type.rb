@@ -10,6 +10,5 @@ module Types
     include Types::Concerns::AssistantFields
     include Types::Concerns::ServiceFields
     include Types::Concerns::SessionServiceFields
-    include Types::Concerns::HiredServiceFields
   end
 end

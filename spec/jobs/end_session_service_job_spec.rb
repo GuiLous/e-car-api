@@ -4,16 +4,13 @@ require 'rails_helper'
 
 RSpec.describe EndSessionServiceJob do
   describe '#perform' do
-
     context 'when standard error happens' do
-      let(:session1) { double('Session', end_at: 1.hour.ago) }
+      it 'logger error' do
+        session_service = Fabricate :session_service, status: :in_progress, end_at: 1.hour.ago
 
-      before do
-        allow(SessionService).to receive(:in_progress).and_return([session1])
-        allow(session1).to receive(:update).and_raise(StandardError, 'Falha ao atualizar sessão')
-      end
+        allow(SessionService).to receive(:in_progress).and_return([ session_service ])
+        allow(session_service).to receive(:update).and_raise(StandardError, 'Falha ao atualizar sessão')
 
-      it 'lança um erro e registra no logger' do
         expect(Rails.logger).to receive(:error).with(/EndSessionServiceJob falhou: Falha ao atualizar sessão/)
 
         expect { described_class.new.perform }.to raise_error(StandardError, 'Falha ao atualizar sessão')

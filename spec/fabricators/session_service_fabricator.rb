@@ -31,7 +31,7 @@ Fabricator(:session_service) do
   assistant_started_at { Time.current }
   consumer_started_at { Time.current }
   end_at { Time.current }
-  status { SessionService.statuses.keys.sample }
+  status { 0 }
   created_at { Time.current }
   updated_at { Time.current }
 end

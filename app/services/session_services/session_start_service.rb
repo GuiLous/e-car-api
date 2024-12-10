@@ -24,11 +24,32 @@ module SessionServices
     def assistant_start_session(session_service)
       return session_service if session_service.assistant_started_at.present?
 
-      session_service.update(assistant_started_at: DateTime.current, status: :in_progress, end_at: DateTime.current + 1.minute)
+      channel_name = session_service.channel_name
+
+      channel = AgoraAdapter.instance.generate_channel_credentials(channel_name: channel_name)
+
+      session_service.update(
+        assistant_started_at: DateTime.current,
+        status: :in_progress,
+        end_at: DateTime.current + 1.minute,
+        assistant_channel_token: channel[:token],
+        assistant_channel_uid: channel[:uid]
+      )
     end
 
     def consumer_start_session(hired_service, session_service)
-      session_service = SessionService.create!(hired_service: hired_service, status: :created) if session_service.nil?
+      channel = AgoraAdapter.instance.generate_channel_credentials
+
+      if session_service.nil?
+        session_service = SessionService.create!(
+          hired_service: hired_service,
+          status: :created,
+          channel_name: channel[:channel],
+          consumer_channel_token: channel[:token],
+          consumer_channel_uid: channel[:uid]
+        )
+      end
+
       return session_service if session_service.consumer_started_at.present?
 
       session_service.update(consumer_started_at: DateTime.current)

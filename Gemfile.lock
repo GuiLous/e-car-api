@@ -72,6 +72,7 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
+    agora_dynamic_key (0.1.0)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -387,6 +388,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  agora_dynamic_key
   annotate (~> 3.2)
   bcrypt (~> 3.1.7)
   bootsnap

@@ -25,6 +25,7 @@ gem "sprockets-rails"
 gem "stimulus-rails"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
+gem 'agora_dynamic_key'
 
 group :development, :test do
   gem "brakeman", require: false

@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Mutations::SessionServiceMutations::StartSession do
-  pending "add some examples to (or delete) #{__FILE__}"
   let(:mutation) do
     <<~GQL
       mutation($hiredServiceId: ID!) {

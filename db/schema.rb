@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_10_124434) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_12_124226) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -83,6 +83,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_124434) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.string "price_id"
+    t.integer "status", default: 0, null: false
+    t.string "price", default: "0", null: false
+    t.string "session_id"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id"
+  end
+
   create_table "service_categories", force: :cascade do |t|
     t.string "name", null: false
     t.integer "type_category", default: 0, null: false
@@ -145,6 +156,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_10_124434) do
   add_foreign_key "assistants", "users"
   add_foreign_key "hired_services", "assistant_services"
   add_foreign_key "hired_services", "users"
+  add_foreign_key "purchases", "users"
   add_foreign_key "session_services", "hired_services"
   add_foreign_key "wallets", "users"
 end

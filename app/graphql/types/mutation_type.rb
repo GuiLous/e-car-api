@@ -22,5 +22,8 @@ module Types
 
     # Session Service
     field :start_session_service, mutation: Mutations::SessionServiceMutations::StartSession
+
+    # Checkout
+    field :create_checkout_session, mutation: Mutations::PaymentGatewayMutations::CreateCheckoutSession
   end
 end

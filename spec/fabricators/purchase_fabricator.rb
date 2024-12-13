@@ -20,4 +20,9 @@
 #  fk_rails_2888c5cba9  (user_id => users.id)
 #
 Fabricator(:purchase) do
+  price_id { '1' }
+  session_id { '1' }
+  price { 0 }
+  status { 0 }
+  user { Fabricate :user }
 end

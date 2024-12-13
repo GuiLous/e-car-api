@@ -13,8 +13,7 @@ module Mutations
         authenticate_user!
         session_service = SessionServices::SessionStartService.instance.start(hired_service_id: hired_service_id, current_user: context[:current_user])
         { session_service: session_service }
-      rescue StandardError => e
-        Rails.logger.error e.message
+      rescue StandardError
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end
     end

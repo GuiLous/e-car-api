@@ -10,6 +10,8 @@ module Types
       end
 
       def coins
+        authenticate_user!
+
         products = Stripe::Product.list(active: true)
 
         product_list = products.data.map do |product|

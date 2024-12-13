@@ -13,9 +13,6 @@ class StripeAdapter
     rescue JSON::ParserError
       Rails.logger.error("Stripe webhook: Invalid payload")
       return
-    rescue Stripe::SignatureVerificationError
-      Rails.logger.error("Stripe webhook: Invalid signature")
-      return
     end
 
     handle_webhook_event(event)
@@ -51,9 +48,11 @@ class StripeAdapter
 
   def add_coins_to_user_wallet(session_id, purchase)
     line_items = Stripe::Checkout::Session.list_line_items(session_id)
+
     product_names = line_items.data.map(&:description)
 
     total_coins = product_names.sum(&:to_f)
+
     purchase.user.wallet.add_coins(total_coins * 100)
   end
 end

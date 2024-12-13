@@ -6,7 +6,7 @@
 #
 #  id         :bigint           not null, primary key
 #  price      :string           default("0"), not null
-#  status     :integer          default(0), not null
+#  status     :integer          default("pending"), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  price_id   :string

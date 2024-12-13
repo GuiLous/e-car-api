@@ -24,8 +24,8 @@ gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "sprockets-rails"
 gem "stimulus-rails"
-gem "turbo-rails"
 gem "stripe"
+gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do

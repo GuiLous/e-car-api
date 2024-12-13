@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
 
   post "/graphql", to: "graphql#execute"
+  post "/stripe/webhook", to: "stripe#webhook"
 
   get "up" => "rails/health#show", as: :rails_health_check
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker

@@ -19,8 +19,7 @@ module Mutations
           price_id: price_id,
           current_user: context[:current_user]
         )
-      rescue StandardError => e
-        Rails.logger.error e.message
+      rescue StandardError
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end
     end

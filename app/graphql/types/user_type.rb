@@ -21,5 +21,9 @@ module Types
     def assistant_services
       object.assistant.assistant_services if object.assistant.present?
     end
+
+    def hired_services
+      object.hired_services.order(created_at: :desc)
+    end
   end
 end

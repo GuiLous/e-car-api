@@ -3,7 +3,7 @@
 module Types
   module Inputs
     class AssistantServiceInputType < GraphQL::Schema::InputObject
-      argument :deadline, String
+      argument :deadline, String, required: false
       argument :description, String, required: true
       argument :modality, String, required: true
       argument :price, Integer, required: true

@@ -7,27 +7,30 @@ module Mutations
 
       field :message, String, null: false
 
+      argument :deadline, String
       argument :description, String, required: true
       argument :modality, String, required: true
       argument :price, Integer, required: true
       argument :service_category_id, ID, required: true
       argument :title, String, required: true
 
-      def resolve(title:, modality:, price:, service_category_id:, description: nil)
+      def resolve(title:, modality:, price:, service_category_id:, deadline: nil, description: nil)
         authenticate_user!
-
+        puts "DEADLINE: #{deadline}"
         AssistantServiceServices::CreateService.instance.create(
           title: title,
           modality: modality,
           price: price,
           service_category_id: service_category_id,
+          deadline: deadline,
           description: description,
           context: context
         )
         { message: "SUCCESS" }
       rescue Exceptions::AssistantServiceAlreadyExistsError => e
         raise GraphQL::ExecutionError, e.message
-      rescue StandardError
+      rescue StandardError => e
+        puts e.message
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end
     end

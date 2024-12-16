@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_12_124226) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_16_120030) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_124226) do
     t.integer "visible", default: 1, null: false
     t.text "description"
     t.string "title", default: "", null: false
+    t.string "deadline"
     t.index ["assistant_id"], name: "index_assistant_services_on_assistant_id"
     t.index ["service_category_id"], name: "index_assistant_services_on_service_category_id"
     t.index ["service_id"], name: "index_assistant_services_on_service_id"

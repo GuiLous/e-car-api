@@ -13,6 +13,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("customer"), not null
+#  status                 :integer          default("offline"), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
@@ -37,6 +38,7 @@ class User < ApplicationRecord
   has_many :purchases, dependent: :destroy
 
   enum :role, { customer: 0, assistant: 1 }
+  enum :status, { offline: 0, online: 1, in_live: 2 }
 
   normalizes :email, with: ->(e) { e.strip.downcase }
 
@@ -44,9 +46,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
 
   def online
-    return false if online_at.nil?
-
-    (Time.current - online_at) <= 3.minutes
+    status == :online
   end
 
   def generate_jwt

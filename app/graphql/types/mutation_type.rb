@@ -7,6 +7,7 @@ module Types
 
     # User
     field :sign_up, mutation: Mutations::UserMutations::SignUp
+    field :update_user_status, mutation: Mutations::UserMutations::UpdateUserStatus
 
     # Hired Service
     field :finish_hired_service, mutation: Mutations::HiredServiceMutations::FinishHiredService

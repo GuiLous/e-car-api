@@ -13,6 +13,7 @@
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  role                   :integer          default("customer"), not null
+#  status                 :integer          default("offline"), not null
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #

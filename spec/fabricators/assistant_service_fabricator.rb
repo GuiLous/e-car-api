@@ -5,6 +5,7 @@
 # Table name: assistant_services
 #
 #  id                  :bigint           not null, primary key
+#  deadline            :string
 #  description         :text
 #  modality            :integer          default("live"), not null
 #  price               :integer          default(0), not null

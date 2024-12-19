@@ -27,7 +27,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_16_120030) do
   end
 
   create_table "assistant_services", force: :cascade do |t|
-    t.bigint "service_id"
     t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -36,6 +35,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_16_120030) do
     t.bigint "service_category_id"
     t.integer "visible", default: 1, null: false
     t.text "description"
+    t.bigint "service_id"
     t.string "title", default: "", null: false
     t.string "deadline"
     t.index ["assistant_id"], name: "index_assistant_services_on_assistant_id"

@@ -7,7 +7,7 @@ module Mutations
 
       field :message, String, null: false
 
-      argument :deadline, String
+      argument :deadline, String, required: false
       argument :description, String, required: true
       argument :modality, String, required: true
       argument :price, Integer, required: true
@@ -16,7 +16,6 @@ module Mutations
 
       def resolve(title:, modality:, price:, service_category_id:, deadline: nil, description: nil)
         authenticate_user!
-        puts "DEADLINE: #{deadline}"
         AssistantServiceServices::CreateService.instance.create(
           title: title,
           modality: modality,
@@ -30,7 +29,7 @@ module Mutations
       rescue Exceptions::AssistantServiceAlreadyExistsError => e
         raise GraphQL::ExecutionError, e.message
       rescue StandardError => e
-        puts e.message
+        Rails.logger.debug e.message
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end
     end

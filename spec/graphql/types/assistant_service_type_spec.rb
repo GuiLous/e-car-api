@@ -69,8 +69,8 @@ RSpec.describe Types::AssistantServiceType do
         context 'when an online filter is provided' do
           context 'when the online is true' do
             it 'returns the assistant services for the given online filter' do
-              user_online = Fabricate :user, online_at: Time.current
-              user_offline = Fabricate :user, online_at: 4.minutes.ago
+              user_online = Fabricate :user, status: :online
+              user_offline = Fabricate :user, status: :offline
 
               assistant_online = Fabricate :assistant, user: user_online
               assistant_offline = Fabricate :assistant, user: user_offline
@@ -90,8 +90,8 @@ RSpec.describe Types::AssistantServiceType do
 
           context 'when the online is false' do
             it 'returns the assistant services for the given online filter' do
-              user_online = Fabricate :user, online_at: Time.current
-              user_offline = Fabricate :user, online_at: 4.minutes.ago
+              user_online = Fabricate :user, status: :online
+              user_offline = Fabricate :user, status: :offline
 
               assistant_online = Fabricate :assistant, user: user_online
               assistant_offline = Fabricate :assistant, user: user_offline
@@ -111,8 +111,8 @@ RSpec.describe Types::AssistantServiceType do
 
           context 'when the online is nil' do
             it 'returns the assistant services for the given online filter' do
-              user_online = Fabricate :user, online_at: Time.current
-              user_offline = Fabricate :user, online_at: 4.minutes.ago
+              user_online = Fabricate :user, status: :online
+              user_offline = Fabricate :user, status: :offline
 
               assistant_online = Fabricate :assistant, user: user_online
               assistant_offline = Fabricate :assistant, user: user_offline
@@ -133,8 +133,8 @@ RSpec.describe Types::AssistantServiceType do
 
         context 'when are multiple filters' do
           it 'returns the assistant services for the given filters' do
-            user_online = Fabricate :user, online_at: Time.current
-            user_offline = Fabricate :user, online_at: 4.minutes.ago
+            user_online = Fabricate :user, status: :online
+            user_offline = Fabricate :user, status: :offline
 
             assistant_online = Fabricate :assistant, user: user_online
             assistant_offline = Fabricate :assistant, user: user_offline

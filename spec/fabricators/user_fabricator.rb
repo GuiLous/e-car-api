@@ -8,7 +8,6 @@
 #  email                  :string           not null
 #  encrypted_password     :string           not null
 #  name                   :string           not null
-#  online_at              :datetime
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -27,7 +26,7 @@ Fabricator(:user) do
   password { 'Taller@123' }
   name { Faker::Name.name }
   role { 0 }
-  online_at { Time.current }
+  status { :online }
 
   after_create do |user|
     Fabricate(:wallet, user: user)

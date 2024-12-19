@@ -10,7 +10,6 @@ module Types
     field :hired_services, [ Types::HiredServiceType ], null: true
     field :id, ID, null: false
     field :name, String, null: false
-    field :online, Boolean, null: false
     field :role, String, null: false
     field :status, String, null: false
     field :wallet, Types::WalletType, null: false

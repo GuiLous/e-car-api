@@ -56,9 +56,9 @@ module Types
       end
 
       def apply_online_filter(query, online)
-        return query.joins(assistant: { user: {} }).where(users: { online_at: [ nil, ..3.minutes.ago ] }) unless online
+        return query.joins(assistant: { user: {} }).where(users: { status: :online }) if online
 
-        query.joins(assistant: { user: {} }).where(users: { online_at: 3.minutes.ago..Time.current })
+        query.joins(assistant: { user: {} }).where(users: { status: :offline })
       end
     end
   end

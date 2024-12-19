@@ -61,27 +61,27 @@ RSpec.describe User do
     end
   end
 
-  describe '#online' do
+  describe '#status' do
     context 'when user is online' do
       it 'returns true' do
-        user = Fabricate(:user, online_at: Time.current)
-        expect(user.online).to be(true)
+        user = Fabricate(:user, status: :online)
+        expect(user.status).to eq('online')
       end
     end
 
     context 'when user is not online' do
       it 'returns false' do
-        user = Fabricate(:user, online_at: 3.minutes.ago)
-        expect(user.online).to be(false)
+        user = Fabricate(:user, status: :offline)
+        expect(user.status).to eq('offline')
       end
     end
   end
 
   describe '#as_json' do
-    it 'returns user as json with field online' do
-      user = Fabricate(:user, online_at: Time.current)
+    it 'returns user as json with field status' do
+      user = Fabricate(:user, status: :online)
 
-      expect(user.as_json).to include(online: true)
+      expect(user.as_json).to include(status: 'online')
     end
   end
 end

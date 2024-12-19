@@ -18,7 +18,7 @@ module Types
       def assistants(online: nil)
         assistants = Assistant.all
 
-        assistants = assistants.joins(:user).where(users: { online_at: 3.minutes.ago..Time.current }) if online.present?
+        assistants = assistants.joins(:user).where(users: { status: :online }) if online.present?
 
         assistants
       end

@@ -63,14 +63,14 @@ RSpec.describe User do
 
   describe '#status' do
     context 'when user is online' do
-      it 'returns true' do
+      it 'returns online' do
         user = Fabricate(:user, status: :online)
         expect(user.status).to eq('online')
       end
     end
 
     context 'when user is not online' do
-      it 'returns false' do
+      it 'returns offline' do
         user = Fabricate(:user, status: :offline)
         expect(user.status).to eq('offline')
       end

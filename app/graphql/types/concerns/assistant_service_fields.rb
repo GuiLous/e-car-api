@@ -32,7 +32,7 @@ module Types
         query = filter_by_assistant(query, filters)
         query = filter_by_modality(query, filters)
         query = filter_by_service_category(query, filters)
-        query = apply_online_filter(query, filters.online) unless filters.online.nil?
+        query = apply_online_filter(query, filters.status) unless filters.status.nil?
 
         query.all
       end
@@ -55,10 +55,11 @@ module Types
         query.where(service_category_id: filters.service_category_id)
       end
 
-      def apply_online_filter(query, online)
-        return query.joins(assistant: { user: {} }).where(users: { status: :online }) if online
+      def apply_online_filter(query, status)
+        return query.joins(assistant: { user: {} }).where(users: { status: %i[online in_live] }) if status == "online"
+        return query.joins(assistant: { user: {} }).where(users: { status: [ :offline ] }) if status == "offline"
 
-        query.joins(assistant: { user: {} }).where(users: { status: :offline })
+        query.joins(assistant: { user: {} })
       end
     end
   end

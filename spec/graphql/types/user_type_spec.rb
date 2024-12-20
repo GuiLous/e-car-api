@@ -28,6 +28,9 @@ RSpec.describe Types::UserType do
                   id
                 }
               }
+              hiredServices {
+                id
+              }
             }
           }
         }
@@ -41,6 +44,8 @@ RSpec.describe Types::UserType do
       service = Fabricate :service
 
       Fabricate :assistant_service, assistant: assistant, service: service
+      hired_service = Fabricate :hired_service, user: user, created_at: 1.day.ago
+      another_hired_service = Fabricate :hired_service, user: user, created_at: Time.current
 
       another_user = Fabricate :user
       another_assistant = Fabricate :assistant, user: another_user
@@ -57,6 +62,9 @@ RSpec.describe Types::UserType do
       expect(data['wallet']['id']).to eq(user.wallet.id.to_s)
       expect(data['assistantSubmission']['id']).to eq(submission.id.to_s)
       expect(data['assistantServices'].count).to eq(1)
+      expect(data['hiredServices'].count).to eq(2)
+      expect(data['hiredServices'].first['id']).to eq(another_hired_service.id.to_s)
+      expect(data['hiredServices'].last['id']).to eq(hired_service.id.to_s)
     end
   end
 end

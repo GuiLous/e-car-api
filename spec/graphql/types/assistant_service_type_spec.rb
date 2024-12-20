@@ -67,7 +67,7 @@ RSpec.describe Types::AssistantServiceType do
         end
 
         context 'when an online filter is provided' do
-          context 'when the online is true' do
+          context 'when the status is online' do
             it 'returns the assistant services for the given online filter' do
               user_online = Fabricate :user, status: :online
               user_offline = Fabricate :user, status: :offline
@@ -79,7 +79,7 @@ RSpec.describe Types::AssistantServiceType do
               Fabricate :assistant_service, assistant: assistant_offline
               Fabricate :assistant_service, assistant: assistant_offline
 
-              filters = { online: true }
+              filters = { status: 'online' }
 
               response = ProladdoreSchema.execute(query, variables: { filters: filters }).as_json
               data = response['data']['assistantServices']
@@ -88,7 +88,7 @@ RSpec.describe Types::AssistantServiceType do
             end
           end
 
-          context 'when the online is false' do
+          context 'when the status is offline' do
             it 'returns the assistant services for the given online filter' do
               user_online = Fabricate :user, status: :online
               user_offline = Fabricate :user, status: :offline
@@ -100,7 +100,7 @@ RSpec.describe Types::AssistantServiceType do
               Fabricate :assistant_service, assistant: assistant_offline
               Fabricate :assistant_service, assistant: assistant_offline
 
-              filters = { online: false }
+              filters = { status: 'offline' }
 
               response = ProladdoreSchema.execute(query, variables: { filters: filters }).as_json
               data = response['data']['assistantServices']
@@ -109,7 +109,7 @@ RSpec.describe Types::AssistantServiceType do
             end
           end
 
-          context 'when the online is nil' do
+          context 'when the status is all' do
             it 'returns the assistant services for the given online filter' do
               user_online = Fabricate :user, status: :online
               user_offline = Fabricate :user, status: :offline
@@ -121,7 +121,7 @@ RSpec.describe Types::AssistantServiceType do
               Fabricate :assistant_service, assistant: assistant_offline
               Fabricate :assistant_service, assistant: assistant_offline
 
-              filters = { online: nil }
+              filters = { status: 'all' }
 
               response = ProladdoreSchema.execute(query, variables: { filters: filters }).as_json
               data = response['data']['assistantServices']
@@ -146,7 +146,7 @@ RSpec.describe Types::AssistantServiceType do
 
             assistant = assistant_service.assistant
 
-            filters = { online: false, assistantId: assistant.id, modality: 'closed_package', serviceCategoryId: service_category.id }
+            filters = { status: 'offline', assistantId: assistant.id, modality: 'closed_package', serviceCategoryId: service_category.id }
 
             response = ProladdoreSchema.execute(query, variables: { filters: filters }).as_json
             data = response['data']['assistantServices']

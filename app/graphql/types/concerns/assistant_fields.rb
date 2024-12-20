@@ -15,10 +15,10 @@ module Types
         end
       end
 
-      def assistants(online: nil)
+      def assistants(status: nil)
         assistants = Assistant.all
 
-        assistants = assistants.joins(:user).where(users: { status: :online }) if online.present?
+        assistants = assistants.joins(:user).where(users: { status: :online }) if status.present?
 
         assistants
       end

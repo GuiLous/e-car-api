@@ -6,8 +6,8 @@ RSpec.describe Mutations::UserMutations::SignUp do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($email: String!, $password: String!, $passwordConfirmation: String!, $role: String!, $name: String!) {
-          signUp(email: $email, password: $password, passwordConfirmation: $passwordConfirmation, role: $role, name: $name) {
+        mutation($email: String!, $password: String!, $passwordConfirmation: String!, $name: String!) {
+          signUp(email: $email, password: $password, passwordConfirmation: $passwordConfirmation, name: $name) {
             token
           }
         }
@@ -19,11 +19,10 @@ RSpec.describe Mutations::UserMutations::SignUp do
         email: 'test@example.com',
         password: 'password',
         passwordConfirmation: 'password',
-        name: 'Test User',
-        role: 'customer'
+        name: 'Test User'
       }
 
-      response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+      response = EcarSchema.execute(mutation, variables: variables).as_json
       data = response['data']['signUp']
       expect(data['token']).to be_present
     end

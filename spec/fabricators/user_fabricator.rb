@@ -25,10 +25,4 @@ Fabricator(:user) do
   email { Faker::Internet.email }
   password { 'Taller@123' }
   name { Faker::Name.name }
-  role { 0 }
-  status { :online }
-
-  after_create do |user|
-    Fabricate(:wallet, user: user)
-  end
 end

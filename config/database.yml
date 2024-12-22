@@ -8,11 +8,11 @@ default: &default
 
 development:
   <<: *default
-  database: proladdore_development
+  database: ecar_development
 
 test:
   <<: *default
-  database: proladdore_test
+  database: ecar_test
 
 production:
   <<: *default

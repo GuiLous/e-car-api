@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProladdoreSchema < GraphQL::Schema
+class EcarSchema < GraphQL::Schema
   max_complexity(500)
   max_depth(20)
 

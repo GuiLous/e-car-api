@@ -9,7 +9,7 @@ RSpec.describe GraphqlController do
     let(:operation_name) { 'SampleOperation' }
 
     before do
-      allow(ProladdoreSchema).to receive(:execute).and_return({ 'data' => { 'field' => 'value' } })
+      allow(EcarSchema).to receive(:execute).and_return({ 'data' => { 'field' => 'value' } })
     end
 
     context 'with valid parameters' do
@@ -50,7 +50,7 @@ RSpec.describe GraphqlController do
 
     context 'when an error occurs' do
       before do
-        allow(ProladdoreSchema).to receive(:execute).and_raise(StandardError, 'Test error')
+        allow(EcarSchema).to receive(:execute).and_raise(StandardError, 'Test error')
       end
 
       it 'raises the error in non-development environments' do

@@ -5,9 +5,7 @@ module UserServices
     include Singleton
 
     def create(params)
-      User.create!(params).tap do |user|
-        Wallet.create(user: user) if user.persisted?
-      end
+      User.create!(params)
     end
   end
 end

@@ -35,18 +35,6 @@ RSpec.describe User do
     end
   end
 
-  context 'enum roles' do
-    it 'defaults to customer' do
-      user = Fabricate(:user)
-      expect(user.role).to eq('customer')
-    end
-
-    it 'can be an assistant' do
-      user = Fabricate(:user, role: :assistant)
-      expect(user.role).to eq('assistant')
-    end
-  end
-
   context 'email normalization' do
     it 'normalizes email to downcase and strips leading/trailing spaces' do
       user = Fabricate(:user, email: ' Test@Example.Com ')
@@ -58,30 +46,6 @@ RSpec.describe User do
     it 'generates a JWT token' do
       user = Fabricate(:user)
       expect(user.generate_jwt).to be_a(String)
-    end
-  end
-
-  describe '#status' do
-    context 'when user is online' do
-      it 'returns online' do
-        user = Fabricate(:user, status: :online)
-        expect(user.status).to eq('online')
-      end
-    end
-
-    context 'when user is not online' do
-      it 'returns offline' do
-        user = Fabricate(:user, status: :offline)
-        expect(user.status).to eq('offline')
-      end
-    end
-  end
-
-  describe '#as_json' do
-    it 'returns user as json with field status' do
-      user = Fabricate(:user, status: :online)
-
-      expect(user.as_json).to include(status: 'online')
     end
   end
 end

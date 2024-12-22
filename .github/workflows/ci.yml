@@ -61,12 +61,12 @@ jobs:
         ports:
           - "5432:5432"
         env:
-          POSTGRES_DB: proladdore_test
+          POSTGRES_DB: ecar_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/proladdore_test"
+      DATABASE_URL: "postgres://postgres:postgres@localhost:5432/ecar_test"
       DEVISE_JWT_SECRET_KEY: "Taller@123"
     steps:
       - name: ExtraService code

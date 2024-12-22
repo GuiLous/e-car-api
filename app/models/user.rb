@@ -29,16 +29,6 @@ class User < ApplicationRecord
          :jwt_authenticatable,
          jwt_revocation_strategy: JwtDenylist
 
-  has_one :assistant, dependent: :destroy
-  has_one :wallet, dependent: :destroy
-
-  has_many :hired_services, dependent: :destroy
-  has_many :assistant_submissions, dependent: :destroy
-  has_many :purchases, dependent: :destroy
-
-  enum :role, { customer: 0, assistant: 1 }
-  enum :status, { offline: 0, online: 1, in_live: 2 }
-
   normalizes :email, with: ->(e) { e.strip.downcase }
 
   validates :name, :email, presence: true
@@ -48,16 +38,11 @@ class User < ApplicationRecord
     JWT.encode(
       {
         id: id,
-        role: role,
         email: email,
         name: name,
         exp: 24.hours.from_now.to_i
       },
       ENV.fetch("DEVISE_JWT_SECRET_KEY")
     )
-  end
-
-  def as_json(options = {})
-    super.merge(status: status.to_s)
   end
 end

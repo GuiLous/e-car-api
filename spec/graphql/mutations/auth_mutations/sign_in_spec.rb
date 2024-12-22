@@ -23,7 +23,7 @@ RSpec.describe Mutations::AuthMutations::SignIn do
           password: user.password
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        response = EcarSchema.execute(mutation, variables: variables).as_json
         data = response['data']['signIn']
         expect(data['token']).to be_present
       end
@@ -38,7 +38,7 @@ RSpec.describe Mutations::AuthMutations::SignIn do
           password: 'invalid_password'
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        response = EcarSchema.execute(mutation, variables: variables).as_json
         error_message = response['errors'].first['message']
         expect(error_message).to eq('INVALID_CREDENTIALS')
       end
@@ -51,7 +51,7 @@ RSpec.describe Mutations::AuthMutations::SignIn do
           password: 'invalid_password'
         }
 
-        response = ProladdoreSchema.execute(mutation, variables: variables).as_json
+        response = EcarSchema.execute(mutation, variables: variables).as_json
         error_message = response['errors'].first['message']
         expect(error_message).to eq('SYSTEM_ERROR')
       end

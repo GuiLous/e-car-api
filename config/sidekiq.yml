@@ -2,12 +2,4 @@
   :dynamic: true
   :listened_queues_only: true
   :schedule:
-    analyse_hired_service_job:
-      class: AnalyseHiredServiceJob
-      cron: "* * * * *"
-      queue: default
-    end_session_service_job:
-      class: EndSessionServiceJob
-      cron: "* * * * *"
-      queue: default
 :max_retries: 3

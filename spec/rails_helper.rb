@@ -14,7 +14,7 @@ SimpleCov.start 'rails'
 SimpleCov.start do
   add_filter '/initializers/'
   add_filter '/config/'
-  add_filter '/app/graphql/proladdore_schema.rb'
+  add_filter '/app/graphql/ecar_schema.rb'
   add_filter '/spec/'
 
   add_group 'Models', 'app/models'

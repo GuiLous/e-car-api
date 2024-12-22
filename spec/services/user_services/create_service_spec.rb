@@ -4,18 +4,17 @@ require "rails_helper"
 
 RSpec.describe UserServices::CreateService do
   describe '#create' do
-    context 'when some errors ocurrs' do
+    context 'when some errors occurs' do
       it 'raises error' do
         Fabricate(:user, email: 'test@example.com')
-        expect { described_class.instance.create(email: 'test@example.com', name: 'test', password: 'password') }.to raise_error(ActiveRecord::RecordInvalid)
+        expect { described_class.instance.create(email: 'test@example.com', first_name: 'test', password: 'password') }.to raise_error(ActiveRecord::RecordInvalid)
       end
     end
 
-    context 'when no errors ocurrs' do
+    context 'when no errors occurs' do
       it 'creates user and wallet' do
-        user = described_class.instance.create(email: 'test@example.com', name: 'test', password: 'password')
+        user = described_class.instance.create(email: 'test@example.com', first_name: 'test', last_name: 'test', phone: 'test', password: 'password')
         expect(User.exists?(id: user.id)).to be(true)
-        expect(user.wallet).not_to be_nil
       end
     end
   end

@@ -4,17 +4,21 @@ module Mutations
   module UserMutations
     class SignUp < BaseMutation
       argument :email, String
-      argument :name, String
+      argument :first_name, String
+      argument :last_name, String
       argument :password, String
       argument :password_confirmation, String
+      argument :phone, String
 
       field :token, String, null: true
 
-      def resolve(email:, password:, password_confirmation:, name:)
+      def resolve(email:, first_name:, last_name:, phone:, password:, password_confirmation:)
         UserServices::CreateService.instance.create(
           email: email,
+          first_name: first_name,
+          last_name: last_name,
+          phone: phone,
           password: password,
-          name: name,
           password_confirmation: password_confirmation
         )
 

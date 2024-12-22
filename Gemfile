@@ -3,7 +3,6 @@
 source "https://rubygems.org"
 ruby "3.3.6"
 
-gem "agora_dynamic_key"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
 gem "devise"
@@ -19,12 +18,10 @@ gem "pg", "~> 1.1"
 gem "puma", ">= 5.0"
 gem "rack-cors"
 gem "rails", "~> 7.2.2"
-gem "redis"
 gem "sidekiq"
 gem "sidekiq-scheduler"
 gem "sprockets-rails"
 gem "stimulus-rails"
-gem "stripe"
 gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
 

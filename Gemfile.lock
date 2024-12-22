@@ -72,7 +72,6 @@ GEM
       minitest (>= 5.1)
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
-    agora_dynamic_key (0.1.0)
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
@@ -251,8 +250,6 @@ GEM
     rake (13.2.1)
     rdoc (6.7.0)
       psych (>= 4.0.0)
-    redis (5.3.0)
-      redis-client (>= 0.22.0)
     redis-client (0.22.2)
       connection_pool
     regexp_parser (2.9.2)
@@ -344,7 +341,6 @@ GEM
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
     stringio (3.1.2)
-    stripe (13.2.0)
     thor (1.3.2)
     tilt (2.4.0)
     timeout (0.4.2)
@@ -389,7 +385,6 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  agora_dynamic_key
   annotate (~> 3.2)
   bcrypt (~> 3.1.7)
   bootsnap
@@ -410,7 +405,6 @@ DEPENDENCIES
   rack-cors
   rails (~> 7.2.2)
   rails-controller-testing
-  redis
   rspec-rails
   rubocop-graphql
   rubocop-performance
@@ -424,7 +418,6 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
-  stripe
   turbo-rails
   tzinfo-data
   web-console

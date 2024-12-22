@@ -7,24 +7,5 @@ module Types
 
     # User
     field :sign_up, mutation: Mutations::UserMutations::SignUp
-    field :update_user_status, mutation: Mutations::UserMutations::UpdateUserStatus
-
-    # Hired Service
-    field :finish_hired_service, mutation: Mutations::HiredServiceMutations::FinishHiredService
-    field :hire_assistant, mutation: Mutations::HiredServiceMutations::HireAssistant
-
-    # Assistant
-    field :submit_assistant, mutation: Mutations::AssistantMutations::SubmitAssistant
-
-    # Assistant Service
-    field :add_assistant_service, mutation: Mutations::AssistantServiceMutations::Add
-    field :update_assistant_service, mutation: Mutations::AssistantServiceMutations::Update
-    field :update_visibility, mutation: Mutations::AssistantServiceMutations::UpdateVisibility
-
-    # Session Service
-    field :start_session_service, mutation: Mutations::SessionServiceMutations::StartSession
-
-    # Checkout
-    field :create_checkout_session, mutation: Mutations::PaymentGatewayMutations::CreateCheckoutSession
   end
 end

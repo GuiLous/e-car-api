@@ -9,10 +9,22 @@ RSpec.describe User do
       expect(user).to be_valid
     end
 
-    it 'is invalid without a name' do
-      user = Fabricate.build(:user, name: nil)
+    it 'is invalid without a first first_name' do
+      user = Fabricate.build(:user, first_name: nil)
       expect(user).not_to be_valid
-      expect(user.errors[:name]).to include("can't be blank")
+      expect(user.errors[:first_name]).to include("can't be blank")
+    end
+
+    it 'is invalid without a last last_name' do
+      user = Fabricate.build(:user, last_name: nil)
+      expect(user).not_to be_valid
+      expect(user.errors[:last_name]).to include("can't be blank")
+    end
+
+    it 'is invalid without a phone' do
+      user = Fabricate.build(:user, phone: nil)
+      expect(user).not_to be_valid
+      expect(user.errors[:phone]).to include("can't be blank")
     end
 
     it 'is invalid without an email' do

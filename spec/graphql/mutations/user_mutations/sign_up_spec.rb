@@ -6,8 +6,8 @@ RSpec.describe Mutations::UserMutations::SignUp do
   describe '#resolve' do
     let(:mutation) do
       <<~GQL
-        mutation($email: String!, $password: String!, $passwordConfirmation: String!, $name: String!) {
-          signUp(email: $email, password: $password, passwordConfirmation: $passwordConfirmation, name: $name) {
+        mutation($email: String!, $password: String!, $passwordConfirmation: String!, $firstName: String!, $lastName: String!, $phone: String!) {
+          signUp(email: $email, password: $password, passwordConfirmation: $passwordConfirmation, firstName: $firstName, lastName: $lastName, phone: $phone) {
             token
           }
         }
@@ -17,9 +17,11 @@ RSpec.describe Mutations::UserMutations::SignUp do
     it 'returns a token' do
       variables = {
         email: 'test@example.com',
-        password: 'password',
-        passwordConfirmation: 'password',
-        name: 'Test User'
+        password: '123456',
+        passwordConfirmation: '123456',
+        firstName: 'xpto',
+        lastName: 'xpto',
+        phone: 'xpto'
       }
 
       response = EcarSchema.execute(mutation, variables: variables).as_json

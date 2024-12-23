@@ -30,7 +30,7 @@ RSpec.describe Authenticatable do
 
       it 'raises an unauthorized error' do
         expect { instance.authenticate_user! }
-          .to raise_error(GraphQL::ExecutionError, 'UNAUTHORIZED')
+          .to raise_error(Exceptions::UnauthorizedError, 'UNAUTHORIZED')
       end
     end
   end

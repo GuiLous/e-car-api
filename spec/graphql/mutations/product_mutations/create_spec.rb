@@ -31,6 +31,8 @@ RSpec.describe Mutations::ProductMutations::Create do
     end
 
     it 'returns success with image upload' do
+      user = Fabricate :user
+
       variables = {
         documentationStatus: "up_to_date",
         mileage: 100,
@@ -41,9 +43,11 @@ RSpec.describe Mutations::ProductMutations::Create do
         year: 2024
       }
 
-      response = EcarSchema.execute(mutation, variables: variables).as_json
+      context = { current_user: user }
+
+      response = EcarSchema.execute(mutation, variables: variables, context: context).as_json
       data = response['data']['createProduct']
-      
+
       expect(data['message']).to eq 'SUCCESS'
     end
   end

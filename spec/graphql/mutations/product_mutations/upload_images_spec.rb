@@ -18,16 +18,19 @@ RSpec.describe Mutations::ProductMutations::UploadImages do
     end
 
     it 'returns success with image upload' do
-      image = fixture_file_upload(Rails.root.join("spec/fixtures/files/test_image.jpg"), 'image/jpeg')
-
+      user = Fabricate :user
       product = Fabricate :product
 
+      file = ApolloUploadServer::Wrappers::UploadedFile.new(Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/test_image.jpg'), 'image/jpg'))
+
       variables = {
-        images: [ image ],
+        images: [ file ],
         productId: product.id
       }
 
-      response = EcarSchema.execute(mutation, variables: variables).as_json
+      context = { current_user: user }
+
+      response = EcarSchema.execute(mutation, variables: variables, context: context).as_json
       data = response['data']['uploadImages']
 
       expect(data['message']).to eq 'SUCCESS'

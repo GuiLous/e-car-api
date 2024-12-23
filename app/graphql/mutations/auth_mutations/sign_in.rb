@@ -11,8 +11,8 @@ module Mutations
 
       def resolve(email:, password:)
         AuthServices::SignInService.instance.sign_in(email: email, password: password)
-      rescue Exceptions::InvalidCredentialsError
-        raise GraphQL::ExecutionError, "INVALID_CREDENTIALS"
+      rescue Exceptions::InvalidCredentialsError => e
+        raise GraphQL::ExecutionError, e.message
       rescue StandardError
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end

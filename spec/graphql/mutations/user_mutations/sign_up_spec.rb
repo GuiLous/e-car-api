@@ -26,6 +26,7 @@ RSpec.describe Mutations::UserMutations::SignUp do
 
       response = EcarSchema.execute(mutation, variables: variables).as_json
       data = response['data']['signUp']
+
       expect(data['token']).to be_present
     end
   end

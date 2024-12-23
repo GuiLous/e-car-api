@@ -7,5 +7,9 @@ module Types
 
     # User
     field :sign_up, mutation: Mutations::UserMutations::SignUp
+
+    # Product
+    field :create_product, mutation: Mutations::ProductMutations::Create
+    field :upload_images, mutation: Mutations::ProductMutations::UploadImages
   end
 end

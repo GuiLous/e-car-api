@@ -4,6 +4,7 @@ source "https://rubygems.org"
 ruby "3.3.6"
 
 gem "activestorage-cloudinary-service"
+gem "apollo_upload_server", "~> 2.1", ">= 2.1.6"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
 gem "cloudinary"

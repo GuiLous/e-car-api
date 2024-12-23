@@ -2,17 +2,15 @@
 
 module Types
   module Concerns
-    module UserFields
+    module ProductFields
       extend ActiveSupport::Concern
 
       included do
-        field :me, Types::UserType, null: true
+        field :products, [ Types::ProductType ], null: false
       end
 
-      def me
-        authenticate_user!
-
-        context[:current_user]
+      def products
+        Product.all
       end
     end
   end

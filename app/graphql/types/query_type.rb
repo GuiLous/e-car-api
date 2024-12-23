@@ -5,5 +5,6 @@ module Types
     include ::Authenticatable
 
     include Types::Concerns::UserFields
+    include Types::Concerns::ProductFields
   end
 end

@@ -13,47 +13,19 @@ module Exceptions
     end
   end
 
-  class SameUserError < BaseError
-    MESSAGE = "SAME_USER_ERROR"
-  end
-
-  class InsufficientCoinsError < BaseError
-    MESSAGE = "INSUFFICIENT_COINS"
-  end
-
-  class UserIsAlreadyAnAssistantError < BaseError
-    MESSAGE = "USER_ALREADY_AN_ASSISTANT"
-  end
-
   class InvalidCredentialsError < BaseError
     MESSAGE = "INVALID_CREDENTIALS"
   end
 
-  class UserHasPendingSubmissionError < BaseError
-    MESSAGE = "USER_HAS_PENDING_SUBMISSION"
+  class ImageRequired < BaseError
+    MESSAGE = "IMAGE_REQUIRED"
   end
 
-  class AssistantServiceAlreadyExistsError < BaseError
-    MESSAGE = "ASSISTANT_SERVICE_ALREADY_EXISTS"
+  class ProductNotFound < BaseError
+    MESSAGE = "PRODUCT_NOT_FOUND"
   end
 
-  class SessionServiceAlreadyStarted < BaseError
-    MESSAGE = "ALREADY_START"
-  end
-
-  class SessionServiceInProgress < BaseError
-    MESSAGE = "IN_PROGRESS"
-  end
-
-  class SessionServiceNotFound < BaseError
-    MESSAGE = "NOT_FOUND"
-  end
-
-  class HiredServiceItsNotLive < BaseError
-    MESSAGE = "SERVICE_NOT_LIVE"
-  end
-
-  class HiredServiceNotFound < BaseError
-    MESSAGE = "HIRED_SERVICE_NOT_FOUND"
+  class UnauthorizedError < BaseError
+    MESSAGE = "UNAUTHORIZED"
   end
 end

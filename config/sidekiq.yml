@@ -1,5 +1,4 @@
 :scheduler:
   :dynamic: true
   :listened_queues_only: true
-  :schedule:
 :max_retries: 3

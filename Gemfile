@@ -3,8 +3,10 @@
 source "https://rubygems.org"
 ruby "3.3.6"
 
+gem "activestorage-cloudinary-service"
 gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", require: false
+gem "cloudinary"
 gem "devise"
 gem "devise-jwt"
 gem "fabrication"

@@ -23,6 +23,8 @@ module Mutations
         )
 
         AuthServices::SignInService.instance.sign_in(email: email, password: password)
+      rescue StandardError
+        raise GraphQL::ExecutionError, "SYSTEM_ERROR"
       end
     end
   end

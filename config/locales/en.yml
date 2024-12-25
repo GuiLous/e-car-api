@@ -28,13 +28,5 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
-  login: "Login"
-  nav:
-    assistant_submissions: "Assistant Submissions"
-    logout: "Logout"
-  assistant_submissions:
-    approved: "Submission approved successfully"
-    error: "Error approving the submission"
-    rejected: "Submission rejected successfully"
+  images_limit: "You can't upload more than 5 images"
   

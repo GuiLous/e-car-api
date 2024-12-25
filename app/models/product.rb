@@ -38,5 +38,5 @@ class Product < ApplicationRecord
   has_many_attached :images
 
   validates :vehicle_name, :year, :mileage, :model, presence: true
-  validates :images, length: { maximum: 5, message: "only up to 5 images are allowed" }
+  validates :images, length: { maximum: 5, message: I18n.t("images_limit") }
 end

@@ -24,19 +24,18 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class User < ApplicationRecord
-  has_many :products, dependent: :destroy
-
   devise :database_authenticatable, :registerable,
          :recoverable, :validatable,
          :jwt_authenticatable,
          jwt_revocation_strategy: JwtDenylist
 
+  has_many :products, dependent: :destroy
+  has_one :address, dependent: :destroy
+
   normalizes :email, with: ->(e) { e.strip.downcase }
 
-  validates :first_name, :email, presence: true
-  validates :last_name, :email, presence: true
-  validates :phone, :email, presence: true
-  validates :email, uniqueness: true
+  validates :first_name, :last_name, :phone, :email, presence: true
+  validates :email, :phone, uniqueness: true
 
   def generate_jwt
     JWT.encode(

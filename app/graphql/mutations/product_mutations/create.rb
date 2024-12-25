@@ -25,7 +25,8 @@ module Mutations
           vehicle_condition: vehicle_condition,
           model: model,
           mileage: mileage,
-          documentation_status: documentation_status
+          documentation_status: documentation_status,
+          user: context[:current_user]
         )
       rescue Exceptions::UnauthorizedError => e
         raise GraphQL::ExecutionError, e.message

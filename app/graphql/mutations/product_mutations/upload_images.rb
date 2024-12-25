@@ -14,10 +14,11 @@ module Mutations
         authenticate_user!
 
         ProductServices::UploadImagesService.instance.upload(
+          product_id: product_id,
           images: images,
-          product_id: product_id
+          user: context[:current_user]
         )
-      rescue Exceptions::ProductNotFound, Exceptions::ImageRequired, Exceptions::UnauthorizedError => e
+      rescue Exceptions::ProductNotFound, Exceptions::UserIsNotOwner, Exceptions::ImageRequired, Exceptions::UnauthorizedError => e
         raise GraphQL::ExecutionError, e.message
       rescue StandardError
         raise GraphQL::ExecutionError, "SYSTEM_ERROR"

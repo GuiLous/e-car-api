@@ -4,10 +4,13 @@ module ProductServices
   class UploadImagesService
     include Singleton
 
-    def upload(product_id:, images:)
+    def upload(product_id:, images:, user:)
       product = Product.find(product_id)
 
       raise Exceptions::ProductNotFound if product.blank?
+
+      raise Exceptions::UserIsNotOwner if product.user.id != user.id
+
       raise Exceptions::ImageRequired if images.blank?
 
       delete_product_images_from_cdn(product)

@@ -20,6 +20,8 @@ class Product < ApplicationRecord
   enum :vehicle_condition, { brand_new: 0, used: 1 }
   enum :documentation_status, { up_to_date: 0, overdue: 1 }
 
+  belongs_to :user
+
   has_many_attached :images
 
   validates :vehicle_name, :year, :mileage, :model, presence: true

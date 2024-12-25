@@ -23,4 +23,5 @@ Fabricator(:product) do
   year { Faker::Vehicle.year }
   mileage { Faker::Vehicle.mileage }
   model { Faker::Vehicle.model }
+  user { Fabricate(:user) }
 end

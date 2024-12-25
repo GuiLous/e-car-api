@@ -28,4 +28,8 @@ module Exceptions
   class UnauthorizedError < BaseError
     MESSAGE = "UNAUTHORIZED"
   end
+
+  class UserIsNotOwner < BaseError
+    MESSAGE = "USER_IS_NOT_OWNER"
+  end
 end

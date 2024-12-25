@@ -13,6 +13,7 @@
 #  vehicle_condition    :integer          default("brand_new"), not null
 #  vehicle_name         :string           not null
 #  vehicle_type         :integer          default("car_type"), not null
+#  verified_status      :integer          default("pending"), not null
 #  year                 :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -36,4 +37,6 @@ Fabricator(:product) do
   model { Faker::Vehicle.model }
   price { Faker::Number.decimal(l_digits: 2, r_digits: 2) }
   user { Fabricate(:user) }
+  verified_status { 0 }
+  created_at { DateTime.now }
 end

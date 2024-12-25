@@ -13,6 +13,7 @@
 #  vehicle_condition    :integer          default("brand_new"), not null
 #  vehicle_name         :string           not null
 #  vehicle_type         :integer          default("car_type"), not null
+#  verified_status      :integer          default("pending"), not null
 #  year                 :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
@@ -30,6 +31,7 @@ class Product < ApplicationRecord
   enum :vehicle_type, { car_type: 0, motorcycle_type: 1 }
   enum :vehicle_condition, { brand_new: 0, used: 1 }
   enum :documentation_status, { up_to_date: 0, overdue: 1 }
+  enum :verified_status, { pending: 0, approved: 1, reproved: 2 }
 
   belongs_to :user
 

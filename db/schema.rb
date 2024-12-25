@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_25_135111) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.float "price", default: 0.0, null: false
+    t.integer "verified_status", default: 0, null: false
     t.integer "discount_percentage"
     t.index ["user_id"], name: "index_products_on_user_id"
   end

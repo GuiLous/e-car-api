@@ -13,7 +13,8 @@ RSpec.describe Mutations::ProductMutations::Create do
           $vehicleCondition: String!,
           $vehicleName: String!,
           $vehicleType: String!,
-          $year: Int!
+          $year: Int!,
+          $price: Float!
         ) {
           createProduct(
             documentationStatus: $documentationStatus,
@@ -22,7 +23,8 @@ RSpec.describe Mutations::ProductMutations::Create do
             vehicleCondition: $vehicleCondition,
             vehicleName: $vehicleName,
             vehicleType: $vehicleType,
-            year: $year
+            year: $year,
+            price: $price,
           ) {
             message
           }
@@ -41,7 +43,8 @@ RSpec.describe Mutations::ProductMutations::Create do
           vehicleCondition: "brand_new",
           vehicleName: "xpto",
           vehicleType: "car_type",
-          year: 2024
+          year: 2024,
+          price: 100.00
         }
 
         context = { current_user: user }
@@ -63,7 +66,8 @@ RSpec.describe Mutations::ProductMutations::Create do
             vehicleCondition: "brand_new",
             vehicleName: "xpto",
             vehicleType: "car_type",
-            year: 2024
+            year: 2024,
+            price: 100.0
           }
 
           response = EcarSchema.execute(mutation, variables: variables).as_json
@@ -86,7 +90,8 @@ RSpec.describe Mutations::ProductMutations::Create do
             vehicleCondition: "brand_new",
             vehicleName: "xpto",
             vehicleType: "car_type",
-            year: 2024
+            year: 2024,
+            price: 100.0
           }
 
           context = { current_user: user }

@@ -5,15 +5,26 @@
 # Table name: products
 #
 #  id                   :bigint           not null, primary key
+#  discount_percentage  :integer
 #  documentation_status :integer          default("up_to_date"), not null
 #  mileage              :integer          not null
 #  model                :string           not null
+#  price                :float            default(0.0), not null
 #  vehicle_condition    :integer          default("brand_new"), not null
 #  vehicle_name         :string           not null
 #  vehicle_type         :integer          default("car_type"), not null
 #  year                 :integer          not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
+#  user_id              :bigint
+#
+# Indexes
+#
+#  index_products_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_dee2631783  (user_id => users.id)
 #
 class Product < ApplicationRecord
   enum :vehicle_type, { car_type: 0, motorcycle_type: 1 }

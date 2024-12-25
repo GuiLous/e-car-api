@@ -3,12 +3,12 @@
 module Mutations
   module UserMutations
     class SignUp < BaseMutation
-      argument :email, String
-      argument :first_name, String
-      argument :last_name, String
-      argument :password, String
-      argument :password_confirmation, String
-      argument :phone, String
+      argument :email, String, required: true
+      argument :first_name, String, required: true
+      argument :last_name, String, required: true
+      argument :password, String, required: true
+      argument :password_confirmation, String, required: true
+      argument :phone, String, required: true
 
       field :token, String, null: true
 

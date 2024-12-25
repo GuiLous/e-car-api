@@ -5,17 +5,18 @@ module Mutations
     class Create < BaseMutation
       include ::Authenticatable
 
-      argument :documentation_status, String
-      argument :mileage, Int
-      argument :model, String
-      argument :vehicle_condition, String
-      argument :vehicle_name, String
-      argument :vehicle_type, String
-      argument :year, Int
+      argument :documentation_status, String, required: true
+      argument :mileage, Int, required: true
+      argument :model, String, required: true
+      argument :price, Float, required: true
+      argument :vehicle_condition, String, required: true
+      argument :vehicle_name, String, required: true
+      argument :vehicle_type, String, required: true
+      argument :year, Int, required: true
 
       field :message, String, null: true
 
-      def resolve(vehicle_name:, vehicle_type:, year:, vehicle_condition:, model:, mileage:, documentation_status:)
+      def resolve(vehicle_name:, vehicle_type:, year:, vehicle_condition:, model:, mileage:, documentation_status:, price:)
         authenticate_user!
 
         ProductServices::CreateService.instance.create(
@@ -26,6 +27,7 @@ module Mutations
           model: model,
           mileage: mileage,
           documentation_status: documentation_status,
+          price: price,
           user: context[:current_user]
         )
       rescue Exceptions::UnauthorizedError => e
